@@ -16,7 +16,7 @@
 <ul>
   <li> Audit current stack (Supabase + Lovable + openAI API prompting + Github). -> Supabase + Typescript + Next.js + OpenAI Prompting  </li>
   <li> Stand up backend on Supabase with clean schema. (Focus on storing users; data normalization/structure will come later) </li>
-  <li> Build API layer for reading/writing data. </li>
+  <li> Build API layer for reading/writing data </li>
   <li> Implement basic user authentication </li>
   <li> Backend administrator status, editor status, viewer (default) (Will be discussed) </li>
   <li> Deploy on reliable hosting (Vercel) </li>
@@ -26,16 +26,16 @@
 🔀 **Part 2: Data Ingestion & Processing Pipeline (Expected: November 7)**
 <p> Key Tasks: </p>
 <ul>
-  <li> Prototype ingestion from trusted sources.  </li>
-  <li> Normalize into structured fields (leader, stance, issue, timestamp). </li>
-  <li> Run a first-pass LLM workflow for tagging/profiling (quote vs policy stance vs bio fact).	</li>
+  <li> Prototype ingestion from trusted sources  </li>
+  <li> Normalize into structured fields (leader, stance, issue, timestamp) </li>
+  <li> Run a first-pass LLM workflow for tagging/profiling (quote vs policy stance vs bio fact)	</li>
 </ul>
 
 
 🏁 **Part 3: Feature Reconstruction (Profiles, Situation Rooms, Trending Topics) (Expected: Dec 3)**
 <p> Key Tasks: </p>
 <ul>
-  <li> Profiles: Structured leader pages (bio, positions, metadata, sources).  </li>
-  <li> Situation Rooms: Time-stamped, hyper-dynamic event feeds. </li>
-  <li> Trending Topics: Surface leaders/issues automatically based on content activity.	</li>
+  <li> Profiles: Structured leader pages (bio, positions, metadata, sources)  </li>
+  <li> Situation Rooms: Time-stamped, hyper-dynamic event feeds </li>
+  <li> Trending Topics: Surface leaders/issues automatically based on content activity	</li>
 </ul>
