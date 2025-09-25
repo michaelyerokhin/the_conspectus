@@ -1,4 +1,4 @@
-<h1> 💡 The Conspectus </h1>
+<h1> 💡 The Conspectus (text me for access to db and lovable mvp) </h1>
 <h3> 📄 Description </h3>
 <p>A civic knowledge platform that creates structured, transparent profiles of influential figures to put them into context of each other, 
   the world and the reader. Each profile is built using AI from trusted journalistic sources, refined by human editors, 
