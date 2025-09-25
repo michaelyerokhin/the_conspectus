@@ -39,3 +39,14 @@
   <li> Situation Rooms: Time-stamped, hyper-dynamic event feeds </li>
   <li> Trending Topics: Surface leaders/issues automatically based on content activity	</li>
 </ul>
+
+
+<h2> 🔑 Project Details </h2>
+
+**Frontend:** Typescript, Nextjs
+<p></p>
+
+**Backend:** Typescript, Nodejs
+<p></p>
+
+**DB:** Supabase
