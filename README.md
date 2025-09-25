@@ -14,12 +14,12 @@
  🛠️ **Part 1: Core Platform Rebuild (Expected: October 14)**
 <p> Key Tasks: </p>
 <ul>
-  <li> Audit current stack (Supabase + Lovable + openAI API prompting + Github).  </li>
-  <li> Stand up backend on Supabase/Postgres (or equivalent you are comfortable with) with clean schema. </li>
-  <li> Build API layer for reading/writing data.	</li>
+  <li> Audit current stack (Supabase + Lovable + openAI API prompting + Github). -> Supabase + Typescript + Next.js + OpenAI Prompting  </li>
+  <li> Stand up backend on Supabase with clean schema. (Focus on storing users; data normalization/structure will come later) </li>
+  <li> Build API layer for reading/writing data. </li>
   <li> Implement basic user authentication </li>
-  <li> Backend administrator status, editor status, viewer (default) </li>
-  <li> Deploy on reliable hosting (Vercel, Netlify, etc). </li>
+  <li> Backend administrator status, editor status, viewer (default) (Will be discussed) </li>
+  <li> Deploy on reliable hosting (Vercel) </li>
 </ul>
 
 
