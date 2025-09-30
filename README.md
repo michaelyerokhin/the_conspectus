@@ -56,7 +56,8 @@
 <h2> 💯 Best Practices / PR Etiquette </h2>
 <p> PR Etiquette: How to make a PR </p>
 <p> If you working on an issue, you can remotely create a branch for the specific issue on the issue details page; choose the option to open it locally.</p>
-<p> After completing work on your branch, type `npx cz' which will walk you through declaring the details of your pr (MAKE SURE YOU ARE ON THE CORRECT BRANCH)</p>
+<li> 1) In project terminal, type `git checkout main` to get onto the main branch and then `git pull` to pull all of the changes from the remote version: this updates your local version with the newest changes. Then, you can create a new branch via `git checkout -b branch-name` so that you are working on a branch that reflects the newest changes of the repo </li>
+<p> After completing work on your branch, type `npx cz' which will walk you through declaring the details of your pr (NEVER PUSH DIRECTLY TO MAIN)</p>
 <p> Make sure to then sync changes in source control or running `git push` to push remotely </p>
 
 
