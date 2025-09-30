@@ -1,0 +1,70 @@
+{
+    "sourceFile": "apps/frontend/package.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 13,
+            "patches": [
+                {
+                    "date": 1759254374322,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1759254379743,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,14 +6,9 @@\n     \"dev\": \"next dev --turbopack\",\n     \"build\": \"next build --turbopack\",\n     \"start\": \"next start\",\n     \"lint\": \"eslint\",\n-    \"dev\": \"next dev\",\n-  \"build\": \"next build\",\n-  \"start\": \"next start\",\n-  \"cypress:open\": \"cypress open\",\n-  \"cypress:run\": \"cypress run\",\n-  \"test:e2e\": \"concurrently \\\"npm run dev\\\" \\\"wait-on http://localhost:3000 && npx cypress run\\\"\"\n+    \n   },\n   \"dependencies\": {\n     \"next\": \"15.5.4\",\n     \"react\": \"19.1.0\",\n"
+                },
+                {
+                    "date": 1759254393995,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,11 @@\n     \"dev\": \"next dev --turbopack\",\n     \"build\": \"next build --turbopack\",\n     \"start\": \"next start\",\n     \"lint\": \"eslint\",\n+    \"cypress:open\": \"cypress open\",\n+  \"cypress:run\": \"cypress run\",\n+  \"test:e2e\": \"concurrently \\\"npm run dev\\\" \\\"wait-on http://localhost:3000 && npx cypress run\\\"\"\n     \n   },\n   \"dependencies\": {\n     \"next\": \"15.5.4\",\n"
+                },
+                {
+                    "date": 1759254399258,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,11 +7,10 @@\n     \"build\": \"next build --turbopack\",\n     \"start\": \"next start\",\n     \"lint\": \"eslint\",\n     \"cypress:open\": \"cypress open\",\n-  \"cypress:run\": \"cypress run\",\n-  \"test:e2e\": \"concurrently \\\"npm run dev\\\" \\\"wait-on http://localhost:3000 && npx cypress run\\\"\"\n-    \n+    \"cypress:run\": \"cypress run\",\n+    \"test:e2e\": \"concurrently \\\"npm run dev\\\" \\\"wait-on http://localhost:3000 && npx cypress run\\\"\"\n   },\n   \"dependencies\": {\n     \"next\": \"15.5.4\",\n     \"react\": \"19.1.0\",\n"
+                },
+                {
+                    "date": 1759254988888,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,9 @@\n     \"lint\": \"eslint\",\n     \"cypress:open\": \"cypress open\",\n     \"cypress:run\": \"cypress run\",\n     \"test:e2e\": \"concurrently \\\"npm run dev\\\" \\\"wait-on http://localhost:3000 && npx cypress run\\\"\"\n+    \n   },\n   \"dependencies\": {\n     \"next\": \"15.5.4\",\n     \"react\": \"19.1.0\",\n"
+                },
+                {
+                    "date": 1759254994990,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,10 +8,10 @@\n     \"start\": \"next start\",\n     \"lint\": \"eslint\",\n     \"cypress:open\": \"cypress open\",\n     \"cypress:run\": \"cypress run\",\n-    \"test:e2e\": \"concurrently \\\"npm run dev\\\" \\\"wait-on http://localhost:3000 && npx cypress run\\\"\"\n-    \n+    \"test:e2e\": \"concurrently \\\"npm run dev\\\" \\\"wait-on http://localhost:3000 && npx cypress run\\\"\",\n+    \"test\"\n   },\n   \"dependencies\": {\n     \"next\": \"15.5.4\",\n     \"react\": \"19.1.0\",\n"
+                },
+                {
+                    "date": 1759255001303,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     \"lint\": \"eslint\",\n     \"cypress:open\": \"cypress open\",\n     \"cypress:run\": \"cypress run\",\n     \"test:e2e\": \"concurrently \\\"npm run dev\\\" \\\"wait-on http://localhost:3000 && npx cypress run\\\"\",\n-    \"test\"\n+    \"test\": \"echo \\\"No frontend Jest tests\\\"\"\n   },\n   \"dependencies\": {\n     \"next\": \"15.5.4\",\n     \"react\": \"19.1.0\",\n"
+                },
+                {
+                    "date": 1759258796985,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,13 @@\n     \"lint\": \"eslint\",\n     \"cypress:open\": \"cypress open\",\n     \"cypress:run\": \"cypress run\",\n     \"test:e2e\": \"concurrently \\\"npm run dev\\\" \\\"wait-on http://localhost:3000 && npx cypress run\\\"\",\n-    \"test\": \"echo \\\"No frontend Jest tests\\\"\"\n+    \"test\": \"echo \\\"No frontend Jest tests\\\"\",\n+    \"build\": \"npx turbo run build\",\n+  \"test\": \"npx turbo run test --filter=backend\",\n+  \"e2e\": \"npx turbo run cypress --filter=frontend\",\n+  \"all\": \"npm run build && npm run test && npm run e2e\"\n   },\n   \"dependencies\": {\n     \"next\": \"15.5.4\",\n     \"react\": \"19.1.0\",\n"
+                },
+                {
+                    "date": 1759258804120,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n     \"cypress:run\": \"cypress run\",\n     \"test:e2e\": \"concurrently \\\"npm run dev\\\" \\\"wait-on http://localhost:3000 && npx cypress run\\\"\",\n     \"test\": \"echo \\\"No frontend Jest tests\\\"\",\n     \"build\": \"npx turbo run build\",\n-  \"test\": \"npx turbo run test --filter=backend\",\n+    \"test\": \"npx turbo run test --filter=backend\",\n   \"e2e\": \"npx turbo run cypress --filter=frontend\",\n   \"all\": \"npm run build && npm run test && npm run e2e\"\n   },\n   \"dependencies\": {\n"
+                },
+                {
+                    "date": 1759258818732,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,13 +9,12 @@\n     \"lint\": \"eslint\",\n     \"cypress:open\": \"cypress open\",\n     \"cypress:run\": \"cypress run\",\n     \"test:e2e\": \"concurrently \\\"npm run dev\\\" \\\"wait-on http://localhost:3000 && npx cypress run\\\"\",\n-    \"test\": \"echo \\\"No frontend Jest tests\\\"\",\n     \"build\": \"npx turbo run build\",\n     \"test\": \"npx turbo run test --filter=backend\",\n-  \"e2e\": \"npx turbo run cypress --filter=frontend\",\n-  \"all\": \"npm run build && npm run test && npm run e2e\"\n+    \"e2e\": \"npx turbo run cypress --filter=frontend\",\n+    \"all\": \"npm run build && npm run test && npm run e2e\"\n   },\n   \"dependencies\": {\n     \"next\": \"15.5.4\",\n     \"react\": \"19.1.0\",\n"
+                },
+                {
+                    "date": 1759258869149,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,9 @@\n     \"lint\": \"eslint\",\n     \"cypress:open\": \"cypress open\",\n     \"cypress:run\": \"cypress run\",\n     \"test:e2e\": \"concurrently \\\"npm run dev\\\" \\\"wait-on http://localhost:3000 && npx cypress run\\\"\",\n+    \"test\": \"echo \\\"No frontend Jest tests\\\"\",\n     \"build\": \"npx turbo run build\",\n     \"test\": \"npx turbo run test --filter=backend\",\n     \"e2e\": \"npx turbo run cypress --filter=frontend\",\n     \"all\": \"npm run build && npm run test && npm run e2e\"\n"
+                },
+                {
+                    "date": 1759258878366,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,8 @@\n     \"lint\": \"eslint\",\n     \"cypress:open\": \"cypress open\",\n     \"cypress:run\": \"cypress run\",\n     \"test:e2e\": \"concurrently \\\"npm run dev\\\" \\\"wait-on http://localhost:3000 && npx cypress run\\\"\",\n-    \"test\": \"echo \\\"No frontend Jest tests\\\"\",\n     \"build\": \"npx turbo run build\",\n     \"test\": \"npx turbo run test --filter=backend\",\n     \"e2e\": \"npx turbo run cypress --filter=frontend\",\n     \"all\": \"npm run build && npm run test && npm run e2e\"\n"
+                },
+                {
+                    "date": 1759258885894,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,8 @@\n     \"lint\": \"eslint\",\n     \"cypress:open\": \"cypress open\",\n     \"cypress:run\": \"cypress run\",\n     \"test:e2e\": \"concurrently \\\"npm run dev\\\" \\\"wait-on http://localhost:3000 && npx cypress run\\\"\",\n-    \"build\": \"npx turbo run build\",\n     \"test\": \"npx turbo run test --filter=backend\",\n     \"e2e\": \"npx turbo run cypress --filter=frontend\",\n     \"all\": \"npm run build && npm run test && npm run e2e\"\n   },\n"
+                },
+                {
+                    "date": 1759262325477,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,11 +9,11 @@\n     \"lint\": \"eslint\",\n     \"cypress:open\": \"cypress open\",\n     \"cypress:run\": \"cypress run\",\n     \"test:e2e\": \"concurrently \\\"npm run dev\\\" \\\"wait-on http://localhost:3000 && npx cypress run\\\"\",\n-    \"test\": \"npx turbo run test --filter=backend\",\n-    \"e2e\": \"npx turbo run cypress --filter=frontend\",\n-    \"all\": \"npm run build && npm run test && npm run e2e\"\n+    \"test\": \"echo 'no tests for frontend yet'\",\n+    \"e2e\": \"npx cypress run\",\n+    \"all\": \"npm run build && npx turbo run test --filter=backend && npm run e2e\"\n   },\n   \"dependencies\": {\n     \"next\": \"15.5.4\",\n     \"react\": \"19.1.0\",\n"
+                }
+            ],
+            "date": 1759254374322,
+            "name": "Commit-0",
+            "content": "{\n  \"name\": \"frontend\",\n  \"version\": \"0.1.0\",\n  \"private\": true,\n  \"scripts\": {\n    \"dev\": \"next dev --turbopack\",\n    \"build\": \"next build --turbopack\",\n    \"start\": \"next start\",\n    \"lint\": \"eslint\",\n    \"dev\": \"next dev\",\n  \"build\": \"next build\",\n  \"start\": \"next start\",\n  \"cypress:open\": \"cypress open\",\n  \"cypress:run\": \"cypress run\",\n  \"test:e2e\": \"concurrently \\\"npm run dev\\\" \\\"wait-on http://localhost:3000 && npx cypress run\\\"\"\n  },\n  \"dependencies\": {\n    \"next\": \"15.5.4\",\n    \"react\": \"19.1.0\",\n    \"react-dom\": \"19.1.0\"\n  },\n  \"devDependencies\": {\n    \"@eslint/eslintrc\": \"^3\",\n    \"@tailwindcss/postcss\": \"^4\",\n    \"@types/node\": \"^20\",\n    \"@types/react\": \"^19\",\n    \"@types/react-dom\": \"^19\",\n    \"cypress\": \"^15.3.0\",\n    \"eslint\": \"^9\",\n    \"eslint-config-next\": \"15.5.4\",\n    \"tailwindcss\": \"^4\",\n    \"typescript\": \"^5\"\n  }\n}\n"
+        }
+    ]
+}

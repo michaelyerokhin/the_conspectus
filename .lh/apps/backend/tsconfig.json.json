@@ -3,11 +3,39 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 7,
             "patches": [
                 {
                     "date": 1758770789746,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1759252528090,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,13 @@\n-\n-  \"extends\": \"../../tsconfig.json\",\n+{\n   \"compilerOptions\": {\n-    \"outDir\": \"dist\"\n+    \"target\": \"ES2020\",\n+    \"module\": \"commonjs\",\n+    \"rootDir\": \"src\",\n+    \"outDir\": \"dist\",\n+    \"strict\": true,\n+    \"esModuleInterop\": true,\n+    \"skipLibCheck\": true,\n+    \"forceConsistentCasingInFileNames\": true\n   },\n-  \"include\": [\"src\"]\n+  \"include\": [\"src\", \"**/*.test.ts\"]\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1759252543612,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,7 @@\n {\n+  \"extends\": \"../../tsconfig.json\",\n   \"compilerOptions\": {\n-    \"target\": \"ES2020\",\n-    \"module\": \"commonjs\",\n-    \"rootDir\": \"src\",\n-    \"outDir\": \"dist\",\n-    \"strict\": true,\n-    \"esModuleInterop\": true,\n-    \"skipLibCheck\": true,\n-    \"forceConsistentCasingInFileNames\": true\n+    \"outDir\": \"dist\"\n   },\n-  \"include\": [\"src\", \"**/*.test.ts\"]\n+  \"include\": [\"src\"]\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1759252549810,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,19 @@\n   \"extends\": \"../../tsconfig.json\",\n   \"compilerOptions\": {\n     \"outDir\": \"dist\"\n   },\n-  \"include\": [\"src\"]\n+  \"include\": [\"src\"],\n+  {\n+    \"compilerOptions\": {\n+      \"target\": \"ES2020\",\n+      \"module\": \"commonjs\",\n+      \"rootDir\": \"src\",\n+      \"outDir\": \"dist\",\n+      \"strict\": true,\n+      \"esModuleInterop\": true,\n+      \"skipLibCheck\": true,\n+      \"forceConsistentCasingInFileNames\": true\n+    },\n+    \"include\": [\"src\", \"**/*.test.ts\"]\n+  }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1759252556121,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,10 +3,9 @@\n   \"compilerOptions\": {\n     \"outDir\": \"dist\"\n   },\n   \"include\": [\"src\"],\n-  {\n-    \"compilerOptions\": {\n+  \"compilerOptions\": {\n       \"target\": \"ES2020\",\n       \"module\": \"commonjs\",\n       \"rootDir\": \"src\",\n       \"outDir\": \"dist\",\n@@ -15,6 +14,5 @@\n       \"skipLibCheck\": true,\n       \"forceConsistentCasingInFileNames\": true\n     },\n     \"include\": [\"src\", \"**/*.test.ts\"]\n-  }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1759252567613,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,16 +3,6 @@\n   \"compilerOptions\": {\n     \"outDir\": \"dist\"\n   },\n   \"include\": [\"src\"],\n-  \"compilerOptions\": {\n-      \"target\": \"ES2020\",\n-      \"module\": \"commonjs\",\n-      \"rootDir\": \"src\",\n-      \"outDir\": \"dist\",\n-      \"strict\": true,\n-      \"esModuleInterop\": true,\n-      \"skipLibCheck\": true,\n-      \"forceConsistentCasingInFileNames\": true\n-    },\n-    \"include\": [\"src\", \"**/*.test.ts\"]\n+  \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1759252582512,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,14 @@\n {\n   \"extends\": \"../../tsconfig.json\",\n   \"compilerOptions\": {\n-    \"outDir\": \"dist\"\n+    \"target\": \"ES2020\",\n+    \"module\": \"commonjs\",\n+    \"rootDir\": \"src\",\n+    \"outDir\": \"dist\",\n+    \"strict\": true,\n+    \"esModuleInterop\": true,\n+    \"skipLibCheck\": true,\n+    \"forceConsistentCasingInFileNames\": true\n   },\n-  \"include\": [\"src\"],\n-  \n+  \"include\": [\"src\", \"**/*.test.ts\"]\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1759261999138,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,6 +9,6 @@\n     \"esModuleInterop\": true,\n     \"skipLibCheck\": true,\n     \"forceConsistentCasingInFileNames\": true\n   },\n-  \"include\": [\"src\", \"**/*.test.ts\"]\n+  \"include\": [\"src\", \"\"]\n }\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1758770789746,

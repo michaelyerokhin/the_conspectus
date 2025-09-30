@@ -1,0 +1,28 @@
+{
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "packageManager": "npm@9.8.1",
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "lint": "eslint . --ext .ts,.tsx",
+    "typecheck": "tsc --build --verbose",
+    "build": "npx turbo run build",
+    "test": "npx turbo run test --filter=backend",
+    "e2e": "npx turbo run cypress"
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0",
+    "turbo": "^2.5.8",
+    "typescript": "^5.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

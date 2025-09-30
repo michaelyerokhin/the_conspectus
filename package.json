@@ -7,11 +7,15 @@
   "packageManager": "npm@9.8.1",
   "scripts": {
     "dev": "turbo run dev --parallel",
-    "build": "turbo run build",
     "lint": "eslint . --ext .ts,.tsx",
-    "typecheck": "tsc --build --verbose"
+    "typecheck": "tsc --build --verbose",
+    "build": "npx turbo run build",
+    "test": "npx turbo run test --filter=backend",
+    "e2e": "npx turbo run cypress"
   },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/mocha": "^10.0.10",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.0.0",
     "prettier": "^3.0.0",

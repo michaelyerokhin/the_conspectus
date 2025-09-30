@@ -1,0 +1,38 @@
+{
+    "sourceFile": "turbo.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1759254427039,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1759255038703,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,13 +8,10 @@\n     \"test\": {\n       \"dependsOn\": [\"build\"],\n       \"outputs\": []\n     },\n-    \"lint\": {\n-      \"outputs\": []\n-    },\n     \"cypress\": {\n       \"dependsOn\": [\"build\"],\n       \"outputs\": []\n     }\n   }\n-}\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1759255107620,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,17 +1,16 @@\n {\n-  \"$schema\": \"https://turborepo.com/schema.json\",\n-  \"pipeline\": {\n-    \"build\": {\n-      \"outputs\": [\"dist/**\", \".next/**\"],\n-      \"dependsOn\": [\"^build\"]\n-    },\n-    \"test\": {\n-      \"dependsOn\": [\"build\"],\n-      \"outputs\": []\n-    },\n-    \"cypress\": {\n-      \"dependsOn\": [\"build\"],\n-      \"outputs\": []\n+    \"$schema\": \"https://turborepo.com/schema.json\",\n+    \"tasks\": {\n+      \"build\": {\n\\ No newline at end of file\n+        \"dependsOn\": [\"^build\"],\n+        \"outputs\": [\".next/**\", \"!.next/cache/**\"]\n+      },\n+      \"check-types\": {\n+        \"dependsOn\": [\"^check-types\"]\n+      },\n+      \"dev\": {\n+        \"persistent\": true,\n+        \"cache\": false\n+      }\n     }\n-  }\n-}\n+  }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1759259448577,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,16 +1,19 @@\n {\n-    \"$schema\": \"https://turborepo.com/schema.json\",\n-    \"tasks\": {\n-      \"build\": {\n-        \"dependsOn\": [\"^build\"],\n-        \"outputs\": [\".next/**\", \"!.next/cache/**\"]\n-      },\n-      \"check-types\": {\n-        \"dependsOn\": [\"^check-types\"]\n-      },\n-      \"dev\": {\n-        \"persistent\": true,\n-        \"cache\": false\n-      }\n+  \"$schema\": \"https://turborepo.com/schema.json\",\n+  \"pipeline\": {\n\\ No newline at end of file\n+    \"build\": {\n+      \"outputs\": [\"dist/**\", \".next/**\"]\n+    },\n+    \"test\": {\n+      \"dependsOn\": [\"build\"],\n+      \"outputs\": []\n+    },\n+    \"dev\": {\n+      \"cache\": false\n+    },\n+    \"cypress\": {\n+      \"dependsOn\": [\"build\"],\n+      \"outputs\": []\n     }\n-  }\n+  }\n+}\n"
+                },
+                {
+                    "date": 1759259566337,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,19 +1,16 @@\n {\n-  \"$schema\": \"https://turborepo.com/schema.json\",\n-  \"pipeline\": {\n-    \"build\": {\n-      \"outputs\": [\"dist/**\", \".next/**\"]\n-    },\n-    \"test\": {\n-      \"dependsOn\": [\"build\"],\n-      \"outputs\": []\n-    },\n-    \"dev\": {\n-      \"cache\": false\n-    },\n-    \"cypress\": {\n-      \"dependsOn\": [\"build\"],\n-      \"outputs\": []\n+    \"$schema\": \"https://turborepo.com/schema.json\",\n+    \"tasks\": {\n+      \"build\": {\n\\ No newline at end of file\n+        \"dependsOn\": [\"^build\"],\n+        \"outputs\": [\".next/**\", \"!.next/cache/**\"]\n+      },\n+      \"check-types\": {\n+        \"dependsOn\": [\"^check-types\"]\n+      },\n+      \"dev\": {\n+        \"persistent\": true,\n+        \"cache\": false\n+      }\n     }\n-  }\n-}\n+  }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1759262794343,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,16 +1,20 @@\n {\n-    \"$schema\": \"https://turborepo.com/schema.json\",\n-    \"tasks\": {\n-      \"build\": {\n-        \"dependsOn\": [\"^build\"],\n-        \"outputs\": [\".next/**\", \"!.next/cache/**\"]\n-      },\n-      \"check-types\": {\n-        \"dependsOn\": [\"^check-types\"]\n-      },\n-      \"dev\": {\n-        \"persistent\": true,\n-        \"cache\": false\n-      }\n+  \"$schema\": \"https://turborepo.com/schema.json\",\n+  \"tasks\": {\n\\ No newline at end of file\n+    \"build\": {\n+      \"dependsOn\": [\"^build\"],\n+      \"outputs\": [\".next/**\", \"!.next/cache/**\"]\n+    },\n+    \"check-types\": {\n+      \"dependsOn\": [\"^check-types\"]\n+    },\n+    \"dev\": {\n+      \"persistent\": true,\n+      \"cache\": false\n+    },\n+    \"test\": {\n+      \"dependsOn\": [\"build\"],\n+      \"outputs\": []\n     }\n-  }\n+  }\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1759254427039,
+            "name": "Commit-0",
+            "content": "{\n  \"$schema\": \"https://turborepo.com/schema.json\",\n  \"pipeline\": {\n    \"build\": {\n      \"outputs\": [\"dist/**\", \".next/**\"],\n      \"dependsOn\": [\"^build\"]\n    },\n    \"test\": {\n      \"dependsOn\": [\"build\"],\n      \"outputs\": []\n    },\n    \"lint\": {\n      \"outputs\": []\n    },\n    \"cypress\": {\n      \"dependsOn\": [\"build\"],\n      \"outputs\": []\n    }\n  }\n}\n"
+        }
+    ]
+}
