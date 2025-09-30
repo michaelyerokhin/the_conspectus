@@ -1,73 +1,104 @@
-<h1> 💡 The Conspectus (Reference Directory for Sections of ReadME--->) </h1>
-<h3> 📄 Description </h3>
-<p>A civic knowledge platform that creates structured, transparent profiles of influential figures to put them into context of each other, 
-  the world and the reader. Each profile is built using AI from trusted journalistic sources, refined by human editors, 
-  and mapped onto a worldview model showing where the figure stands on key global issues and values. 
-  Users can take a quiz to map their own worldview on the same axes and compare their alignment to any profiled figure, 
-  with the long-term goal of becoming a go-to resource for clear, 
-  trustworthy context about people shaping the world and using the collected data to grow an elevated, high-value intelligence level.</p>
+
+# 💡 The Conspectus
+
+_A civic knowledge platform for structured, transparent profiles of influential figures._
+
+---
+
+### 📄 Description
+
+The Conspectus is a civic knowledge platform that creates structured, transparent profiles of influential figures to place them in context with each other, the world, and the reader.  
+
+Each profile is:
+- Built using AI from trusted journalistic sources  
+- Refined by human editors  
+- Mapped onto a worldview model showing where the figure stands on key global issues and values  
+
+Users can also take a quiz to map their own worldview on the same axes and compare their alignment to any profiled figure.  
+
+**Long-term goal:** Become a go-to resource for clear, trustworthy context about people shaping the world, while using collected data to build elevated, high-value intelligence.
+
+---
+
+# 🗓️⚙️ Technical Roadmap
+
+### 🛠️ Part 1: Core Platform Rebuild (Expected: October 14)
+**Key Tasks:**
+- Audit current stack (Supabase + Lovable + OpenAI API + GitHub) → Migrate to **Supabase + Typescript + Next.js + OpenAI Prompting**  
+- Stand up backend on Supabase with clean schema (focus: storing users; structure later)  
+- Build API layer for reading/writing data  
+- Implement basic user authentication  
+- Define backend roles: administrator, editor, viewer (default)  
+- Deploy on reliable hosting (Vercel)  
+
+---
+
+### 🔀 Part 2: Data Ingestion & Processing Pipeline (Expected: November 7)
+**Key Tasks:**
+- Prototype ingestion from trusted sources  
+- Normalize into structured fields (leader, stance, issue, timestamp)  
+- Run a first-pass LLM workflow for tagging/profiling (quote vs policy stance vs bio fact)  
+
+---
+
+### 🏁 Part 3: Feature Reconstruction (Expected: Dec 3)
+**Key Tasks:**
+- **Profiles:** Structured leader pages (bio, positions, metadata, sources)  
+- **Situation Rooms:** Time-stamped, hyper-dynamic event feeds  
+- **Trending Topics:** Automatically surface leaders/issues based on content activity  
+
+---
+
+### 🔑 Project Details
+
+- **Frontend:** Typescript, Next.js  
+- **Backend:** Typescript, Node.js  
+- **Database:** Supabase 
+- **Testing:** Cypress, Jest
+- **Build:** Turbo 
+
+---
+
+# 💯 Best Practices / PR Etiquette
+
+### Creating a PR
+If you’re working on an issue, create a branch from the issue page (open it locally). In your terminal:
+```bash
+   git checkout main
+   git pull
+   git checkout -b branch-name
+```
+
+### Testing  
+📝 Testing! Reference Testing section below before continuing here!
+
+### Final Steps
+⚠️ Safety first! Put all credentials into `.env` file and use them from there. Make sure `.env` is in the `.gitignore` so that it is not visible in the remote.
+
+### Committing
+Finally, type `npx cz` in your terminal, which will prompt you to declare the details of your PR (**NEVER PUSH DIRECTLY TO MAIN**). Make sure to then sync changes in source control or by running `git push` to push remotely.
+
+**You should always request someone to review your PR before it is merged.**
 
 
-<h2> 🗓️⚙️ Technical Roadmap </h2>
 
+ 
 
- 🛠️ **Part 1: Core Platform Rebuild (Expected: October 14)**
-<p> Key Tasks: </p>
-<ul>
-  <li> Audit current stack (Supabase + Lovable + openAI API prompting + Github). -> Supabase + Typescript + Next.js + OpenAI Prompting  </li>
-  <li> Stand up backend on Supabase with clean schema. (Focus on storing users; data normalization/structure will come later) </li>
-  <li> Build API layer for reading/writing data </li>
-  <li> Implement basic user authentication </li>
-  <li> Backend administrator status, editor status, viewer (default) (Will be discussed) </li>
-  <li> Deploy on reliable hosting (Vercel) </li>
-</ul>
+# 🦺 Testing!
+We will be using **Cypress** and **Jest** for testing the frontend/backend, respectively. For the most part, we will be writing our tests with Jest as this project is heavily backend based: Don't worry too much about Cypress for now :) 
 
-
-🔀 **Part 2: Data Ingestion & Processing Pipeline (Expected: November 7)**
-<p> Key Tasks: </p>
-<ul>
-  <li> Prototype ingestion from trusted sources  </li>
-  <li> Normalize into structured fields (leader, stance, issue, timestamp) </li>
-  <li> Run a first-pass LLM workflow for tagging/profiling (quote vs policy stance vs bio fact)	</li>
-</ul>
-
-
-🏁 **Part 3: Feature Reconstruction (Profiles, Situation Rooms, Trending Topics) (Expected: Dec 3)**
-<p> Key Tasks: </p>
-<ul>
-  <li> Profiles: Structured leader pages (bio, positions, metadata, sources)  </li>
-  <li> Situation Rooms: Time-stamped, hyper-dynamic event feeds </li>
-  <li> Trending Topics: Surface leaders/issues automatically based on content activity	</li>
-</ul>
-
-
-<h2> 🔑 Project Details </h2>
-
-**Frontend:** Typescript, Nextjs
-<p></p>
-
-**Backend:** Typescript, Nodejs
-<p></p>
-
-**DB:** Supabase
-
-
-
-<h2> 💯 Best Practices / PR Etiquette </h2>
-<p> PR Etiquette: How to make a PR </p>
-<p> If you working on an issue, you can remotely create a branch for the specific issue on the issue details page; choose the option to open it locally.</p>
-<li> 1) In project terminal, type `git checkout main` to get onto the main branch and then `git pull` to pull all of the changes from the remote version: this updates your local version with the newest changes. Then, you can create a new branch via `git checkout -b branch-name` so that you are working on a branch that reflects the newest changes of the repo </li>
-<p> After completing work on your branch, make sure you did these things first:</p>
-<li> ⚠️ Safety first! Put all credentials into `.env` file and use them from there. Make sure `.env` is in the `.gitignore` </li>
-<li> 📝 Testing! Reference Testing section below before continuing here! </li>
-<p> Finally, type `npx cz' which will walk you through declaring the details of your PR (NEVER PUSH DIRECTLY TO MAIN)Make sure to then sync changes in source control or running `git push` to push remotely </p>
-
-<p> You should always request someone to review your PR before it is merged. </p>
+After you have finished making changes on the backend, you should write Jest tests within `apps/backend/src/tests` (very rudimentary example found in `example.test.ts`)
+**Your tests should ensure accuracy by mocking the behavior your feature aims to accomplish.**
+- **Resources on Jest: https://jestjs.io/docs/getting-started**
 
 
 
 
+# 🧠 Useful Commands
+- **Booting up: `git pull && npm run build`**
+- **Testing: `cd <directory> && npm run test`**
+- **Committing: `git add` (either `.` for everything or type the files you want to add to your commit) `&& npx cz`** 
+- **Updating: `npm install && npm run build`**
+- **Everything sucks: `close editor and go for a walk`**
 
-<h2> 🦺 Testing! </h2>
-<p> In Progress....</p>
 
