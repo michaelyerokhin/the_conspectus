@@ -1,4 +1,4 @@
-<h1> 💡 The Conspectus (text me for access to db and lovable mvp) </h1>
+<h1> 💡 The Conspectus (Reference Directory for Sections of ReadME--->) </h1>
 <h3> 📄 Description </h3>
 <p>A civic knowledge platform that creates structured, transparent profiles of influential figures to put them into context of each other, 
   the world and the reader. Each profile is built using AI from trusted journalistic sources, refined by human editors, 
@@ -50,3 +50,13 @@
 <p></p>
 
 **DB:** Supabase
+
+
+
+<h2> 💯 Best Practices / PR Etiquette </h2>
+<p> PR Etiquette: How to make a PR </p>
+<p> If you working on an issue, you can remotely create a branch for the specific issue on the issue details page; choose the option to open it locally.</p>
+<p> After completing work on your branch, type `npx cz' which will walk you through declaring the details of your pr (MAKE SURE YOU ARE ON THE CORRECT BRANCH)</p>
+<p> Make sure to then sync changes in source control or running `git push` to push remotely </p>
+
+
