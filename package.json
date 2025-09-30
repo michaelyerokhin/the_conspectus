@@ -12,9 +12,15 @@
     "typecheck": "tsc --build --verbose"
   },
   "devDependencies": {
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.0.0",
     "prettier": "^3.0.0",
     "turbo": "^2.5.8",
     "typescript": "^5.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
