@@ -4,28 +4,49 @@
 > tsc -b && jest
 
 [1G[0K[1m[2mDetermining test suites to run...[22m[22m[?2026h[999D[K
-[?2026l[?2026h[K[1A
-[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/tests/[22m[1mexample.test.ts[22m
-[?2026l[?2026h[K[1A[K[1A
-[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/tests/[22m[1mexample.test.ts[22m
-[?2026l[?2026h[K[1A[K[1A[0m[7m[1m[32m PASS [39m[22m[27m[0m [2msrc/tests/[22m[1mexample.test.ts[22m
 
+[1mTest Suites: [22m0 of 2 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        0 s[?2026l[?2026h[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2mdist/tests/[22m[1mexample.test.js[22m
 [0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/tests/[22m[1mexample.test.ts[22m
-[?2026l[?2026h[K[1A[K[1A
-[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/tests/[22m[1mexample.test.ts[22m
-[?2026l[?2026h[K[1A[K[1A
-[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2mdist/tests/[22m[1mexample.test.js[22m
-[?2026l[?2026h[K[1A[K[1A
-[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2mdist/tests/[22m[1mexample.test.js[22m
-[?2026l[?2026h[K[1A[K[1A
-[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2mdist/tests/[22m[1mexample.test.js[22m
-[?2026l[?2026h[K[1A[K[1A[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mdist/tests/[22m[1mexample.test.js[22m
+
+[1mTest Suites: [22m0 of 2 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        0 s[?2026l[?2026h[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mdist/tests/[22m[1mexample.test.js[22m
 
 [0m[7m[33m[1m RUNS [22m[39m[27m[0m [2mdist/tests/[22m[1mexample.test.js[22m
-[?2026l[?2026h[K[1A[K[1A[?2026l[999D[K
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/tests/[22m[1mexample.test.ts[22m
+
+[1mTest Suites: [22m0 of 2 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        0 s[?2026l[?2026h[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2mdist/tests/[22m[1mexample.test.js[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/tests/[22m[1mexample.test.ts[22m
+
+[1mTest Suites: [22m0 of 2 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        0 s[?2026l[?2026h[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/tests/[22m[1mexample.test.ts[22m
+
+[1mTest Suites: [22m[1m[32m1 passed[39m[22m, 1 of 2 total
+[1mTests:       [22m[1m[32m1 passed[39m[22m, 1 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        0 s[?2026l[?2026h[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[32m PASS [39m[22m[27m[0m [2msrc/tests/[22m[1mexample.test.ts[22m
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/tests/[22m[1mexample.test.ts[22m
+
+[1mTest Suites: [22m[1m[32m1 passed[39m[22m, 1 of 2 total
+[1mTests:       [22m[1m[32m1 passed[39m[22m, 1 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        0 s[?2026l[?2026h[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[?2026l[999D[K
 [1mTest Suites: [22m[1m[32m2 passed[39m[22m, 2 total
 [1mTests:       [22m[1m[32m2 passed[39m[22m, 2 total
 [1mSnapshots:   [22m0 total
-[1mTime:[22m        0.811 s, estimated 1 s
+[1mTime:[22m        0.695 s
 [2mRan all test suites[22m[2m.[22m
 [?2026h[?2026l[1G[0K⠙[1G[0K
