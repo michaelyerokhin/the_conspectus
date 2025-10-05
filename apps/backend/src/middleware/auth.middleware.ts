@@ -12,6 +12,19 @@ declare global {
   }
 }
 
+/**
+ * Express middleware to authenticate requests using a Bearer access token.
+ *
+ * Behavior:
+ * - Reads `Authorization: Bearer <token>` header
+ * - Calls `supabaseAdmin.auth.getUser(token)` to validate the token and populate
+ *   `req.user = { id, email }` on success.
+ *
+ * Responses:
+ * - 401: missing token
+ * - 403: invalid/expired token
+ * - 403: authentication failed (internal)
+ */
 export const authenticateToken = async (
   req: Request,
   res: Response,

@@ -2,6 +2,24 @@ import { Request, Response } from 'express';
 import { supabaseAdmin } from '../config/supabase';
 import { ca } from 'zod/v4/locales';
 
+/**
+ * Login endpoint.
+ *
+ * Accepts { email, password } in the request body. Uses Supabase `signInWithPassword`
+ * to verify credentials and returns a small user object and session token on success.
+ *
+ * Inputs:
+ * - req.body.email: string
+ * - req.body.password: string
+ *
+ * Success response (200): { user: { id, email }, session: { access_token, expires_in } }
+ * Error responses:
+ * - 400: missing email/password
+ * - 401: invalid credentials
+ * - 500: internal server error
+ *
+ * Note: This is a public endpoint (no auth required).
+ */
 export const login = async (req: Request, res: Response): Promise<void> => {
   try {
     const { email, password } = req.body;
@@ -44,6 +62,18 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 };
 
 
+/**
+ * Get current authenticated user.
+ *
+ * Requires `authenticateToken` middleware to have set `req.user`.
+ * Returns Supabase admin user record for the current user id.
+ *
+ * Success response (200): { user }
+ * Error responses:
+ * - 401: not authenticated (missing req.user)
+ * - 404: user not found
+ * - 500: internal server error
+ */
 export const getCurrentUser = async (req: Request, res: Response): Promise<void> => {
   try {
     if (!req.user) {
@@ -72,6 +102,20 @@ export const getCurrentUser = async (req: Request, res: Response): Promise<void>
 };
 
 
+/**
+ * Register endpoint.
+ *
+ * Creates a new Supabase auth user using the admin API, then signs them in to
+ * return an initial session token. Accepts { email, password, name } in the body.
+ *
+ * Success response (201): { user, session }
+ * Error responses:
+ * - 400: missing email/password or creation/sign-in failure
+ * - 500: internal server error
+ *
+ * Note: This endpoint performs admin operations and should be protected or rate
+ * limited in production. It uses the service role key on the server.
+ */
 export const register = async (req: Request, res: Response): Promise<void> => {
   try{
     const { email, password, name } = req.body;
