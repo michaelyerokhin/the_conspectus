@@ -4,3 +4,8 @@ dist/
 .env
 .DS_Store
 + .turbo
+tsconfig.tsbuildinfo
+apps/backend/tsconfig.tsbuildinfo
+apps/backend/src/*.js
+apps/frontend/src/*.js
+dist/
