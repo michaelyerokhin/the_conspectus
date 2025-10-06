@@ -3,4 +3,12 @@ node_modules/
 dist/
 .env
 .DS_Store
-+ .turbo
+
+# Turbo
+.turbo/
+**/.turbo/
+*.turbo.log
+turbo.log
+
+# TypeScript build info
+*.tsbuildinfo
