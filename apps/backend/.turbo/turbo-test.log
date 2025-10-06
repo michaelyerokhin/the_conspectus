@@ -14,7 +14,129 @@
 [?2026l[?2026h[K[1A[K[1A
 [0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/tests/[22m[1mexample.test.ts[22m
 [?2026l[?2026h[K[1A[K[1A
-[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2mdist/tests/[22m[1mexample.test.js[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2mdist/tests/[22m[1msupabase.test.js[22m
+[?2026l[?2026h[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2mdist/tests/[22m[1msupabase.test.js[22m
+[?2026l[?2026h[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2mdist/tests/[22m[1msupabase.test.js[22m
+[?2026l[?2026h[K[1A[K[1A[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mdist/tests/[22m[1msupabase.test.js[22m
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2mdist/tests/[22m[1msupabase.test.js[22m
+[?2026l[?2026h[K[1A[K[1A  [1m● [22mConsole
+
+    [2mconsole.log[22m
+      [dotenv@17.2.3] injecting env (3) from .env [2m-- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`[0m
+[2m[22m
+[2m      [2mat _log ([22m[2m../../node_modules/dotenv/lib/main.js[2m:142:11)[22m[2m[22m
+
+    [2mconsole.log[22m
+      Query result: {
+        data: [
+          {
+            id: '1ecb8e58-7edc-43b5-a298-ef7e676beff3',
+            user_id: '4af6f6fe-b82a-4c4f-9068-ebe0c290b246',
+            display_name: 'Jenn ',
+            created_at: '2025-07-22T16:44:30.393301+00:00',
+            updated_at: '2025-07-22T20:02:59.635551+00:00'
+          },
+          {
+            id: '6abf4c65-dd89-432c-8af0-13d475c99229',
+            user_id: '2def2166-f462-42f1-9193-7546b4127b4e',
+            display_name: 'rpander93@gmail.com',
+            created_at: '2025-08-07T18:47:35.613686+00:00',
+            updated_at: '2025-08-07T18:47:35.613686+00:00'
+          },
+          {
+            id: '14288be4-01f2-4e4a-83e5-a66ed3aae324',
+            user_id: '5dd1877f-644a-457b-9db7-5e5d971793b0',
+            display_name: 'jenniferkorn19@gmail.com',
+            created_at: '2025-08-11T10:49:36.270432+00:00',
+            updated_at: '2025-08-11T10:49:36.270432+00:00'
+          },
+          {
+            id: '281e320e-cee8-4d70-baa8-7e31af40943d',
+            user_id: 'c70c32b0-db22-4af3-b687-b7c69dbcfd7c',
+            display_name: 'jennasherman29@gmail.com',
+            created_at: '2025-08-11T15:13:21.10285+00:00',
+            updated_at: '2025-08-11T15:13:21.10285+00:00'
+          },
+          {
+            id: 'bc7eb6d1-2185-441e-bfcb-3aafd2013525',
+            user_id: '456d7e03-ffb3-4a3c-9ac3-db25140d362d',
+            display_name: 'rachelorah@hotmail.co.uk',
+            created_at: '2025-08-11T19:28:35.966221+00:00',
+            updated_at: '2025-08-11T19:28:35.966221+00:00'
+          }
+        ],
+        error: null
+      }
+[2m[22m
+[2m      [2mat Object.<anonymous> ([22m[2m[0m[36mdist/tests/supabase.test.js[39m[0m[2m:16:17)[22m[2m[22m
+
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2mdist/tests/[22m[1msupabase.test.js[22m
+[?2026l[?2026h[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/tests/[22m[1msupabase.test.ts[22m
+[?2026l[?2026h[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/tests/[22m[1msupabase.test.ts[22m
+[?2026l[?2026h[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/tests/[22m[1msupabase.test.ts[22m
+[?2026l[?2026h[K[1A[K[1A[0m[7m[1m[32m PASS [39m[22m[27m[0m [2msrc/tests/[22m[1msupabase.test.ts[22m
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/tests/[22m[1msupabase.test.ts[22m
+[?2026l[?2026h[K[1A[K[1A  [1m● [22mConsole
+
+    [2mconsole.log[22m
+      [dotenv@17.2.3] injecting env (3) from .env [2m-- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops[0m
+[2m[22m
+[2m      [2mat _log ([22m[2m../../node_modules/dotenv/lib/main.js[2m:142:11)[22m[2m[22m
+
+    [2mconsole.log[22m
+      Query result: {
+        data: [
+          {
+            id: '1ecb8e58-7edc-43b5-a298-ef7e676beff3',
+            user_id: '4af6f6fe-b82a-4c4f-9068-ebe0c290b246',
+            display_name: 'Jenn ',
+            created_at: '2025-07-22T16:44:30.393301+00:00',
+            updated_at: '2025-07-22T20:02:59.635551+00:00'
+          },
+          {
+            id: '6abf4c65-dd89-432c-8af0-13d475c99229',
+            user_id: '2def2166-f462-42f1-9193-7546b4127b4e',
+            display_name: 'rpander93@gmail.com',
+            created_at: '2025-08-07T18:47:35.613686+00:00',
+            updated_at: '2025-08-07T18:47:35.613686+00:00'
+          },
+          {
+            id: '14288be4-01f2-4e4a-83e5-a66ed3aae324',
+            user_id: '5dd1877f-644a-457b-9db7-5e5d971793b0',
+            display_name: 'jenniferkorn19@gmail.com',
+            created_at: '2025-08-11T10:49:36.270432+00:00',
+            updated_at: '2025-08-11T10:49:36.270432+00:00'
+          },
+          {
+            id: '281e320e-cee8-4d70-baa8-7e31af40943d',
+            user_id: 'c70c32b0-db22-4af3-b687-b7c69dbcfd7c',
+            display_name: 'jennasherman29@gmail.com',
+            created_at: '2025-08-11T15:13:21.10285+00:00',
+            updated_at: '2025-08-11T15:13:21.10285+00:00'
+          },
+          {
+            id: 'bc7eb6d1-2185-441e-bfcb-3aafd2013525',
+            user_id: '456d7e03-ffb3-4a3c-9ac3-db25140d362d',
+            display_name: 'rachelorah@hotmail.co.uk',
+            created_at: '2025-08-11T19:28:35.966221+00:00',
+            updated_at: '2025-08-11T19:28:35.966221+00:00'
+          }
+        ],
+        error: null
+      }
+[2m[22m
+[2m      [2mat Object.<anonymous> ([22m[2m[0m[36msrc/tests/supabase.test.ts[39m[0m[2m:21:13)[22m[2m[22m
+
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/tests/[22m[1msupabase.test.ts[22m
 [?2026l[?2026h[K[1A[K[1A
 [0m[7m[33m[1m RUNS [22m[39m[27m[0m [2mdist/tests/[22m[1mexample.test.js[22m
 [?2026l[?2026h[K[1A[K[1A
@@ -23,9 +145,9 @@
 
 [0m[7m[33m[1m RUNS [22m[39m[27m[0m [2mdist/tests/[22m[1mexample.test.js[22m
 [?2026l[?2026h[K[1A[K[1A[?2026l[999D[K
-[1mTest Suites: [22m[1m[32m2 passed[39m[22m, 2 total
-[1mTests:       [22m[1m[32m2 passed[39m[22m, 2 total
+[1mTest Suites: [22m[1m[32m4 passed[39m[22m, 4 total
+[1mTests:       [22m[1m[32m4 passed[39m[22m, 4 total
 [1mSnapshots:   [22m0 total
-[1mTime:[22m        0.811 s, estimated 1 s
+[1mTime:[22m        1.069 s
 [2mRan all test suites[22m[2m.[22m
 [?2026h[?2026l[1G[0K⠙[1G[0K
