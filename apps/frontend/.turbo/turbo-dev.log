@@ -1,0 +1,29 @@
+
+> frontend@0.1.0 dev
+> next dev --turbopack
+
+[1G[0K [33m[1m⚠[22m[39m Port 3000 is in use by process 94012, using available port 3001 instead.
+   [1m[38;2;173;127;168m▲ Next.js 15.5.4[39m[22m (Turbopack)
+   - Local:        http://localhost:3001
+   - Network:      http://172.20.58.80:3001
+
+ [32m[1m✓[22m[39m Starting...
+ [32m[1m✓[22m[39m Ready in 669ms
+ [37m[1m○[22m[39m Compiling / ...
+ [32m[1m✓[22m[39m Compiled / in 990ms
+ GET / [32m200[39m in 1151ms
+ [32m[1m✓[22m[39m Compiled /login in 446ms
+ GET /login [32m200[39 [32m[1m✓[22m[39m Compiled in 36ms
+9ms
+ [32m[1m✓[22m[39m Compiled in 30ms
+ [32m[1m✓[22m[39m Compiled /login in 10ms
+ GET /login [32m200[39m in 34ms
+ [32m[1m✓[22m[39m Compiled in 26ms
+ [32m[1m✓[22m[39m Compiled in 26ms
+ [32m[1m✓[22m[39m Compiled in 30ms
+ [32m[1m✓[22m[39m Compiled in 17ms
+ [32m[1m✓[22m[39m Compiled in 28ms
+ [32m[1m✓[22m[39m Compiled in 26ms
+ [32m[1m✓[22m[39m Compiled in 18ms
+[?25h
+[1G[0K⠙[1G[0K
