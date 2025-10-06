@@ -2,90 +2,28 @@
 > frontend@0.1.0 dev
 > next dev --turbopack
 
-[1G[0K   [1m[38;2;173;127;168m▲ Next.js 15.5.4[39m[22m (Turbopack)
-   - Local:        http://localhost:3000
-   - Network:      http://192.168.1.235:3000
+[1G[0K [33m[1m⚠[22m[39m Port 3000 is in use by process 94012, using available port 3001 instead.
+   [1m[38;2;173;127;168m▲ Next.js 15.5.4[39m[22m (Turbopack)
+   - Local:        http://localhost:3001
+   - Network:      http://172.20.58.80:3001
 
  [32m[1m✓[22m[39m Starting...
- [32m[1m✓[22m[39m Ready in 761ms
+ [32m[1m✓[22m[39m Ready in 669ms
  [37m[1m○[22m[39m Compiling / ...
- [32m[1m✓[22m[39m Compiled / in 1098ms
- GET / [32m200[39m in 1265ms
- [32m[1m✓[22m[39m Compiled /favicon.ico in 82ms
- GET /favicon.ico?favicon.0b3bf435.ico [32m200[39m in 328ms
- [32m[1m✓[22m[39m Compiled in 27ms
- [32m[1m✓[22m[39m Compiled / in 15ms
- GET / [32m200[39m in 62ms
- [32m[1m✓[22m[39m Compiled / in 20ms
- GET / [32m200[39m in 58ms
- GET / [32m200[39m in 40ms
- [32m[1m✓[22m[39m Compiled /login in 126ms
- GET /login [32m200[39m in 150ms
- [32m[1m✓[22m[39m Compiled /_not-found/page in 103ms
- POST /api/auth/login [33m404[39m in 197ms
- GET /login [32m200[39m in 27ms
- [32m[1m✓[22m[39m Compiled in 27ms
- GET /login [32m200[39m in 63ms
- GET /favicon.ico?favicon.0b3bf435.ico [32m200[39m in 259ms
- [32m[1m✓[22m[39m Compiled / in 17ms
- GET / [32m200[39m in 68ms
- GET / [32m200[39m in 91ms
- GET /favicon.ico?favicon.0b3bf435.ico [32m200[39m in 221ms
- [32m[1m✓[22m[39m Compiled / in 15ms
- GET / [32m200[39m in 66ms
- [32m[1m✓[22m[39m Compiled / in 11ms
- GET / [32m200[39m in 47ms
- [32m[1m✓[22m[39m Compiled / in 12ms
- GET / [32m200[39m in 55ms
- [32m[1m✓[22m[39m Compiled / in 12ms
- GET / [32m200[39m in 56ms
- [32m[1m✓[22m[39m Compiled / in 10ms
- GET / [32m200[39m in 44ms
- GET /login [32m200[39m in 65ms
- [32m[1m✓[22m[39m Compiled in 22ms
- [32m[1m✓[22m[39m Compiled in 34ms
- [32m[1m✓[22m[39m Compiled in 25ms
- [32m[1m✓[22m[39m Compiled in 20ms
- [32m[1m✓[22m[39m Compiled in 29ms
- [32m[1m✓[22m[39m Compiled in 19ms
+ [32m[1m✓[22m[39m Compiled / in 990ms
+ GET / [32m200[39m in 1151ms
+ [32m[1m✓[22m[39m Compiled /login in 446ms
+ GET /login [32m200[39 [32m[1m✓[22m[39m Compiled in 36ms
+9ms
  [32m[1m✓[22m[39m Compiled in 30ms
- [32m[1m✓[22m[39m Compiled in 20ms
- [32m[1m✓[22m[39m Compiled in 24ms
- [32m[1m✓[22m[39m Compiled in 19ms
- [32m[1m✓[22m[39m Compiled in 21ms
- [32m[1m✓[22m[39m Compiled in 22ms
- [32m[1m✓[22m[39m Compiled in 19ms
- [32m[1m✓[22m[39m Compiled in 24ms
+ [32m[1m✓[22m[39m Compiled /login in 10ms
+ GET /login [32m200[39m in 34ms
  [32m[1m✓[22m[39m Compiled in 26ms
- [32m[1m✓[22m[39m Compiled in 27ms
- [32m[1m✓[22m[39m Compiled in 25ms
- [32m[1m✓[22m[39m Compiled in 27ms
- [32m[1m✓[22m[39m Compiled in 25ms
- [32m[1m✓[22m[39m Compiled in 27ms
- [32m[1m✓[22m[39m Compiled in 22ms
  [32m[1m✓[22m[39m Compiled in 26ms
- [32m[1m✓[22m[39m Compiled in 24ms
  [32m[1m✓[22m[39m Compiled in 30ms
- [32m[1m✓[22m[39m Compiled in 25ms
- [32m[1m✓[22m[39m Compiled in 24ms
- [32m[1m✓[22m[39m Compiled in 25ms
- [32m[1m✓[22m[39m Compiled in 33ms
- [32m[1m✓[22m[39m Compiled in 37ms
- [32m[1m✓[22m[39m Compiled in 25ms
- [32m[1m✓[22m[39m Compiled in 24ms
- [32m[1m✓[22m[39m Compiled in 23ms
- [32m[1m✓[22m[39m Compiled in 25ms
- [32m[1m✓[22m[39m Compiled in 19ms
+ [32m[1m✓[22m[39m Compiled in 17ms
+ [32m[1m✓[22m[39m Compiled in 28ms
  [32m[1m✓[22m[39m Compiled in 26ms
- [32m[1m✓[22m[39m Compiled in 28ms
- [32m[1m✓[22m[39m Compiled in 28ms
- [32m[1m✓[22m[39m Compiled in 24ms
- [32m[1m✓[22m[39m Compiled in 22ms
- [32m[1m✓[22m[39m Compiled in 24ms
- [32m[1m✓[22m[39m Compiled in 25ms
- [32m[1m✓[22m[39m Compiled in 24ms
- [32m[1m✓[22m[39m Compiled in 19ms
- [32m[1m✓[22m[39m Compiled in 28ms
- [32m[1m✓[22m[39m Compiled in 22ms
+ [32m[1m✓[22m[39m Compiled in 18ms
 [?25h
 [1G[0K⠙[1G[0K
