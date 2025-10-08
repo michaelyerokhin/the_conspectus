@@ -12,3 +12,11 @@ turbo.log
 
 # TypeScript build info
 *.tsbuildinfo
+
+# Editor/local history artifacts
+.history/
+**/.history/
+.lh/
+**/.lh/
+.lhignore/
+**/.lhignore/
