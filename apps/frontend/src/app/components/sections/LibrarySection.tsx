@@ -1,6 +1,6 @@
 import { CONTAINER_CLASS } from "../constants";
 import { libraryCards, libraryFilters } from "../data";
-import { SearchIcon, ArrowRightIcon } from "../icons";
+import { ArrowRightIcon } from "../icons";
 import { LibraryCard } from "../cards/LibraryCard";
 import { SectionHeading } from "../ui/SectionHeading";
 
