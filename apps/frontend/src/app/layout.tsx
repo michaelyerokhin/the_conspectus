@@ -13,9 +13,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Conspectus",
+  title: "The Conspectus",
   description:
     "Conspectus helps you explore leaders, issues, and global movements with clean, structured intelligence.",
+  icons: {
+    icon: "/conspectus-logo-no-bg.png",
+    shortcut: "/conspectus-logo-no-bg.png",
+    apple: "/conspectus-logo-no-bg.png",
+  },
 };
 
 export default function RootLayout({
