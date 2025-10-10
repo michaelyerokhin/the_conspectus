@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { supabaseAdmin } from '../config/supabase';
-import { ca } from 'zod/v4/locales';
+import { clearAuthCookies, setAuthCookies } from '../utils/authCookies';
 
 /**
  * Login endpoint.
@@ -50,6 +50,8 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
     // Success - send back user info and token
     console.log('Logged in succesfully!');
+    setAuthCookies(res, data.session);
+
     res.status(200).json({
       user: {
         id: data.user.id,
@@ -163,6 +165,8 @@ export const register = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
+    setAuthCookies(res, sessionData.session);
+
     res.status(201).json({
       user: {
         id: data.user.id,
@@ -180,4 +184,26 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     console.error('Register error:', error);
     res.status(500).json({ error: 'Internal server error' });
   }  
+};
+
+/**
+ * Logout endpoint.
+ *
+ * Clears authentication cookies and revokes Supabase sessions for the current user.
+ *
+ * Success response (204): no content
+ * Error responses:
+ * - 500: failed to revoke session
+ */
+export const logout = async (_req: Request, res: Response): Promise<void> => {
+	try {
+    console.log('Attempting to logout now!');
+		clearAuthCookies(res);
+    console.log('Logged out succesfully!');
+		res.status(204).send();
+	} catch (error) {
+		console.error('Logout error:', error);
+		clearAuthCookies(res);
+		res.status(500).json({ error: 'Internal server error' });
+	}
 };

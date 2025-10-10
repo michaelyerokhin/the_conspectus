@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { supabaseAdmin } from '../config/supabase';
+import { getAccessTokenFromCookies } from '../utils/authCookies';
 
 declare global {
   namespace Express {
@@ -33,7 +34,11 @@ export const authenticateToken = async (
   try {
     console.log('\n===== Authenticating token =====\n');
     const authHeader = req.headers.authorization;
-    const token = authHeader && authHeader.split(' ')[1];
+    let token = authHeader && authHeader.split(' ')[1];
+
+    if (!token) {
+      token = getAccessTokenFromCookies(req.headers.cookie);
+    }
 
     if (!token) {
       console.log('No token provided');
