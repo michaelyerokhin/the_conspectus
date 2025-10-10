@@ -3,9 +3,20 @@ node_modules/
 dist/
 .env
 .DS_Store
-+ .turbo
-tsconfig.tsbuildinfo
-apps/backend/tsconfig.tsbuildinfo
-apps/backend/src/*.js
-apps/frontend/src/*.js
-dist/
+
+# Turbo
+.turbo/
+**/.turbo/
+*.turbo.log
+turbo.log
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Editor/local history artifacts
+.history/
+**/.history/
+.lh/
+**/.lh/
+.lhignore/
+**/.lhignore/
