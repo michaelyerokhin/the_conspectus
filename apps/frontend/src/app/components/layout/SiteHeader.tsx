@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import { CONTAINER_CLASS } from "../constants";
 import { navLinks } from "../data";
-import { ArrowRightIcon, RefreshIcon, SearchIcon, UserIcon } from "../icons";
+import { SearchIcon, UserIcon } from "../icons";
 
 export function SiteHeader() {
   return (
