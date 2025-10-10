@@ -139,13 +139,11 @@ export const listUsers = async (req: Request, res: Response): Promise<void> => {
 		// Admin v1 supports pagination via page/per_page
 		const page = Math.floor(offset / limit) + 1;
 		const per_page = limit;
-		const adminUrl = `${baseUrl.replace(/\/+$/, '')}/admin/v1/users?page=${page}&per_page=${per_page}`;
 
-		const resp = await fetch(adminUrl, {
-			headers: {
-				apikey: serviceKey,
-				Authorization: `Bearer ${serviceKey}`,
-			},
+		console.log('Fetching users from page:', page, 'with limit:', per_page);
+		const { data: { users }, error } = await supabaseAdmin.auth.admin.listUsers({
+			page: page,
+			perPage: per_page
 		});
 
 		if (error) {
@@ -154,7 +152,6 @@ export const listUsers = async (req: Request, res: Response): Promise<void> => {
 			return;
 		}
 
-		const users = await resp.json();
 		// Admin REST returns an array of users; return with pagination metadata
 		console.log('Users found succesfully!');
 		res.status(200).json({ users, page, per_page });
