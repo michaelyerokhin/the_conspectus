@@ -31,21 +31,26 @@ export const authenticateToken = async (
   next: NextFunction
 ): Promise<void> => {
   try {
+    console.log('\n===== Authenticating token =====\n');
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(' ')[1];
 
     if (!token) {
+      console.log('No token provided');
       res.status(401).json({ error: 'Access token required' });
       return;
     }
 
     const response = await supabaseAdmin.auth.getUser(token);
-    const { data, error } = response as any;
+    const { data, error } = response as any; /** Consider typing this? */
+    console.log('Got response from Supabase!');
 
     const user = data?.user;
 
     if (error || !user) {
-      const message = error?.message || 'Invalid or expired token';
+      const message = error?.message || 'An unexpected error occurred';
+      console.log("User:", JSON.stringify(user));
+      console.log('Error:', message);
       res.status(403).json({ error: message });
       return;
     }
@@ -55,6 +60,7 @@ export const authenticateToken = async (
       email: user.email || '',
     };
 
+    console.log("Succesfully authenticted token!")
     next();
   } catch (error) {
     console.error('Auth middleware error:', error);

@@ -53,6 +53,7 @@ export const getUser = async (req: Request, res: Response): Promise<void> => {
  */
 export const updateUser = async (req: Request, res: Response): Promise<void> => {
 	try {
+		console.log('\n===== Updating User =====\n');
 		const { id } = req.params;
 		const updates = req.body;
 		if (!id) {
@@ -89,6 +90,7 @@ export const updateUser = async (req: Request, res: Response): Promise<void> => 
  */
 export const deleteUser = async (req: Request, res: Response): Promise<void> => {
 	try {
+		console.log('\n===== Deleting User =====\n');
 		const { id } = req.params;
 		if (!id) {
 			res.status(400).json({ error: 'User id is required' });
@@ -124,10 +126,12 @@ export const listUsers = async (req: Request, res: Response): Promise<void> => {
 	const offset = Math.max(parseInt((req.query.offset as string) || '0', 10), 0);
 
 	try {
+		console.log('\n===== Listing Users =====\n');
 		const serviceKey = process.env.SUPABASE_SERVICE_KEY;
 		const baseUrl = process.env.SUPABASE_URL;
 
 		if (!serviceKey || !baseUrl) {
+			console.log('Server misconfigured: SUPABASE_SERVICE_KEY or SUPABASE_URL missing');
 			res.status(500).json({ error: 'Server misconfigured: SUPABASE_SERVICE_KEY or SUPABASE_URL missing' });
 			return;
 		}
@@ -144,14 +148,15 @@ export const listUsers = async (req: Request, res: Response): Promise<void> => {
 			},
 		});
 
-		if (!resp.ok) {
-			const text = await resp.text();
-			res.status(resp.status).json({ error: `Admin API error: ${text}` });
+		if (error) {
+			console.log('Error fetching users:', error);
+			res.status(500).json({ error: 'Internal server error' });
 			return;
 		}
 
 		const users = await resp.json();
 		// Admin REST returns an array of users; return with pagination metadata
+		console.log('Users found succesfully!');
 		res.status(200).json({ users, page, per_page });
 	} catch (err) {
 		console.error('listUsers error:', err);

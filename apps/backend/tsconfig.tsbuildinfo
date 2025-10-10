@@ -1,1 +1,1 @@
-{"root":["./src/index.ts","./src/tests/example.test.ts"],"version":"5.9.2"}
+{"root":["./src/index.ts","./src/config/supabase.ts","./src/controllers/auth.controller.ts","./src/controllers/user.controller.ts","./src/middleware/auth.middleware.ts","./src/routes/auth.routes.ts","./src/routes/user.routes.ts","./src/tests/example.test.ts"],"version":"5.9.2"}
