@@ -17,9 +17,9 @@ export const metadata: Metadata = {
   description:
     "Conspectus helps you explore leaders, issues, and global movements with clean, structured intelligence.",
   icons: {
-    icon: "/conspectus-logo-no-bg.png",
-    shortcut: "/conspectus-logo-no-bg.png",
-    apple: "/conspectus-logo-no-bg.png",
+    icon: "/conspectus-logo.png",
+    shortcut: "/conspectus-logo.png",
+    apple: "/conspectus-logo.png",
   },
 };
 
