@@ -143,18 +143,22 @@ export const register = async (req: Request, res: Response): Promise<void> => {
         name: name || '',
       },
     });
+
     if (error || !data || !data.user) {
       const message = error?.message || 'Failed to create user';
       res.status(400).json({ error: message });
       return;
     }
 
+    console.log('Attepmting to register with Supabase now!');
     const { data: sessionData, error: signInError } = await supabaseAdmin.auth.signInWithPassword({
       email,
       password,
     });
+
     if (signInError || !sessionData || !sessionData.session) {
       const message = signInError?.message || 'Failed to sign in new user';
+      console.log(`Error: ${error}`);
       res.status(400).json({ error: message });
       return;
     }
@@ -170,6 +174,8 @@ export const register = async (req: Request, res: Response): Promise<void> => {
         expires_in: sessionData.session.expires_in,
       },
     });
+
+    console.log('Succesfully registered user!');
   } catch (error) {
     console.error('Register error:', error);
     res.status(500).json({ error: 'Internal server error' });
