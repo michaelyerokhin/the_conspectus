@@ -6,6 +6,7 @@ import { supabaseAdmin } from '../config/supabase';
  *
  * Params:
  * - req.params.id: string
+ *! This is the user_id field!
  *
  * Success (200): { user }
  * Errors:
@@ -17,19 +18,26 @@ import { supabaseAdmin } from '../config/supabase';
  */
 export const getUser = async (req: Request, res: Response): Promise<void> => {
 	try {
+		console.log('\n===== Getting a specific user =====\n');
 		const { id } = req.params;
 		if (!id) {
-			res.status(400).json({ error: 'User id is required' });
+			console.error('User id is required!');
+			res.status(400).json({ error: 'User id is required!' });
 			return;
 		}
 
+		console.log('Getting user from Supabase now!');
 		const { data, error } = await supabaseAdmin.auth.admin.getUserById(id);
+		console.log({ data, error });
+
 		if (error || !data || !data.user) {
 			const message = error?.message || 'User not found';
+			console.error(`Error: ${message}`);
 			res.status(404).json({ error: message });
 			return;
 		}
 
+		console.log('Succesfully found user!');
 		res.status(200).json({ user: data.user });
 	} catch (err) {
 		console.error('getUser error:', err);
@@ -68,6 +76,7 @@ export const updateUser = async (req: Request, res: Response): Promise<void> => 
 			return;
 		}
 
+		console.log('Succesfully updated user!');
 		res.status(200).json({ user: data.user });
 	} catch (err) {
 		console.error('updateUser error:', err);
@@ -93,16 +102,19 @@ export const deleteUser = async (req: Request, res: Response): Promise<void> => 
 		console.log('\n===== Deleting User =====\n');
 		const { id } = req.params;
 		if (!id) {
+			console.error(`User id is required`);
 			res.status(400).json({ error: 'User id is required' });
 			return;
 		}
 
 		const { error } = await supabaseAdmin.auth.admin.deleteUser(id);
 		if (error) {
+			console.error(`Error: ${error}`);
 			res.status(400).json({ error: error.message });
 			return;
 		}
 
+		console.log('Succesfully deleted user!');
 		res.status(204).send();
 	} catch (err) {
 		console.error('deleteUser error:', err);
