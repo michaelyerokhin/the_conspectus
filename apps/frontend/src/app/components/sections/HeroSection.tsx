@@ -18,9 +18,6 @@ export function HeroSection() {
             width={64}
           />
         </div>
-        <span className="mt-10 inline-flex items-center gap-2 rounded-full border border-slate-200/70 bg-white/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">
-          Structured Intelligence
-        </span>
         <div className="mt-6 max-w-3xl space-y-6">
           <h1 className="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
             Navigate leaders, debates, and global power with clarity.

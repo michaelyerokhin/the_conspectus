@@ -31,14 +31,6 @@ export function LibrarySection() {
                 </button>
               ))}
             </div>
-            <label className="relative flex w-full items-center gap-3 rounded-full border border-slate-200/70 bg-white/90 px-4 py-3 text-sm text-slate-600 shadow-sm focus-within:border-slate-300 focus-within:ring-2 focus-within:ring-slate-900/10 sm:max-w-xs">
-              <SearchIcon />
-              <input
-                className="w-full bg-transparent outline-none placeholder:text-slate-400"
-                placeholder="Search figures, categories..."
-                type="search"
-              />
-            </label>
           </div>
         </div>
 

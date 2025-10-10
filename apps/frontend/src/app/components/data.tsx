@@ -172,33 +172,7 @@ export const trendingTopics: Topic[] = [
       { label: "Nuances", value: "6" },
     ],
     updated: "Updated 3 weeks ago",
-  },
-  {
-    title: "North Korean Nuclear Capabilities",
-    summary:
-      "North Korea's weapons development, sanctions regime effectiveness, and ongoing diplomatic maneuvering across Northeast Asia.",
-    badges: ["Security"],
-    tags: ["nuclear", "sanctions", "peninsula"],
-    metrics: [
-      { label: "Leaders", value: "2" },
-      { label: "Events", value: "5" },
-      { label: "Nuances", value: "7" },
-    ],
-    updated: "Updated 1 month ago",
-  },
-  {
-    title: "Sudan Civil War",
-    summary:
-      "The conflict between the Sudanese Armed Forces and Rapid Support Forces with humanitarian fallout, regional mediation, and global aid coordination.",
-    badges: ["Humanitarian"],
-    tags: ["africa", "conflict", "aid"],
-    metrics: [
-      { label: "Leaders", value: "5" },
-      { label: "Events", value: "8" },
-      { label: "Nuances", value: "9" },
-    ],
-    updated: "Updated 2 weeks ago",
-  },
+  }
 ];
 
 export const discoveryHighlights: DiscoveryHighlight[] = [

@@ -8,7 +8,7 @@ export function DiscoverySection() {
       <div className="mx-auto max-w-3xl text-center">
         <SectionHeading
           eyebrow="Discovery"
-          title="What is their deal?"
+          title="What is our deal?"
           description="Conspectus distills nuanced narratives so you can understand influence, alliances, and fault lines at a glance."
           align="center"
         />
