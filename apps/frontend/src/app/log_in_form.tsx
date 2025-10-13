@@ -1,10 +1,8 @@
 'use client';
 
+import { setDefaultAutoSelectFamily } from 'net';
 import Link from 'next/link';
 import { useState, FormEvent } from 'react';
-import { FaGoogle, FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
-import { FaRegEnvelope } from 'react-icons/fa';
-import { MdLockOutline } from 'react-icons/md';
 
 /**
  * Interface for login form input data
@@ -277,91 +275,55 @@ export default function LoginForm() {
 
     // Here render login form
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-gray-200">
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <div className="bg-white rounded-2xl shadow-2xl flex w-2/3 max-w-4xl">
-          {/* Left: Sign In Section */}
-          <div className="w-3/5 p-5">
-            <div className="text-left font-bold">
-              The <span className="text-green-500">Conspectus</span>
-            </div>
+    <div className = "min-h-screen  flex items-center justify-center bg-gray-50 px-4">
+      <div className  = "w-full max-w-md  bg-white shadow-lg rounded-xl p-8">
+        <h2 className = "text-2xl font-semibold text-gray-900 mb-2"> Sign in </h2>
+        <p className = "text-gray-500 mb-6">  Sign in to access your saved survey data</p>
+        <form onSubmit = {handleSubmit} className="space-y-5">
+          <div> 
+            <label className = "block text-sm font-medium text-gray-700"> Email </label>
+            <input
+            type="email"
+            placeholder= "Enter your email"
+            value={state.formData.email}
+            onChange = {(e)=> handleInputChange('password', e.target.value)}
+            required
+            className= "mt-1 w-full  border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+            </div> 
 
-            <div className="py-4" />
-            <h2 className="text-3xl font-bold text-green-500 mb-2">
-              Sign in to your account
-            </h2>
-            <div className="border-2 w-10 border-green-500 inline-block mb-2" />
-
-            {/* Social Login Icons */}
-            <div className="flex justify-center my-2">
-              <a href="#" className="border-2 border-gray-200 rounded-full p-3 mx-1">
-                <FaFacebookF className="text-sm" />
-              </a>
-              <a href="#" className="border-2 border-gray-200 rounded-full p-3 mx-1">
-                <FaLinkedinIn className="text-sm" />
-              </a>
-              <a href="#" className="border-2 border-gray-200 rounded-full p-3 mx-1">
-                <FaGoogle className="text-sm" />
-              </a>
-            </div>
-
-            <p className="text-black">or use your email account</p>
-
-            {/* Form Inputs */}
-            <div className="flex flex-col items-center">
-              <div className="bg-gray-100 w-64 p-2 flex items-center m-2">
-                <FaRegEnvelope className="text-gray-400 m-2" />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  className="bg-gray-100 outline-none text-sm flex-1"
-                />
-              </div>
-
-              <div className="bg-gray-100 w-64 p-2 flex items-center m-2">
-                <MdLockOutline className="text-gray-400 m-2" />
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  className="bg-gray-100 outline-none text-sm flex-1"
-                />
-              </div>
-
-              <div className="flex w-64 justify-between mb-5">
-                <label className="flex items-center text-xs">
-                  <input type="checkbox" name="remember" className="mr-1" />
-                  Remember Me
-                </label>
-                <Link href="#" className="text-xs">Forgot Password?</Link>
-              </div>
-
-              {/* Sign In Button */}
-              <a
-                href="#"
-                className="border-2 border-green-500 text-green-500 rounded-full px-12 py-2 inline-block font-semibold hover:bg-green-500 hover:text-white"
-              >
-                Sign In
-              </a>
-            </div>
+        <div> 
+          <label className  = "block text-sm font-medium text-gray-700"> Password</label> 
+          <input
+          type="password"
+          placeholder= "Enter your password"
+          value={state.formData.password}
+          onChange = {(e)=> handleInputChange('email', e.target.value)}
+          required
+          className= "mt-1 w-full  border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
           </div>
+        {state.error  &&(
+          <p className="text-red-500 text-sm text-center"> </p>
+        )}
+        <button
+        type = "submit"
+        disabled = {state.isLoading}
+        className = "w-full bg-gray-900 hover:bg-gray-800 text-white font-medium py-2.5 rounded-lg  transition"
+        >
+          Sign In
+          
+          </button>
+        </form>
 
-          {/* Right: Welcome Section */}
-          <div className="w-2/5 bg-green-500 text-white rounded-tr-2xl rounded-br-2xl py-36 px-12">
-            <h2 className="text-3xl font-bold mb-2">Hello There!</h2>
-            <div className="border-2 w-10 bg-white inline-block mb-2 border-green-500" />
-            <p className="mb-2">
-              Fill out personal information and start your journey with us
-            </p>
-            <Link
-              href= "/login/signup"
-              className="border-2 border-white rounded-full px-12 py-2 inline-block font-semibold text-white hover:bg-white hover:text-green-500"
-            >Sign Up
-            </Link>
-          </div>
-        </div>
-      </main>
-    </div>
+        <p className= "text-center text-sm text-gray-600 mt-6">
+          Don&apos;t have an account? {' '}
+
+          <Link href= "/signup"  className = "text-indigo-600  hover:underline"> 
+          Sign Up </Link>  {/* Sign Up UI in progress */}
+        </p>
+         </div> 
+
+      </div>
   );
 }
