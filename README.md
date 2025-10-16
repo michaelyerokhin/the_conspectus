@@ -20,7 +20,13 @@ Users can also take a quiz to map their own worldview on the same axes and compa
 
 ---
 
+Here is the original Lovable [demo](https://lovable.dev/projects/ddfcee68-4795-48c6-96c9-0655448ede7a?joinedViaInviteLink=true). DM Michael if you lack permissions.
+
 # 🗓️⚙️ Technical Roadmap
+<img width="569" height="838" alt="image" src="https://github.com/user-attachments/assets/d0aa7e40-4a53-4cb9-996d-34dbfdc5c3cd" />
+
+👉👉 View/comment on the design decisions [here](https://www.notion.so/Technical-Design-Decision-Document-28b250e4573880e7bf67dc5d701b48cf?source=copy_link).
+
 
 <img width="517" height="565" alt="Screenshot 2025-09-14 at 13 42 04" src="https://github.com/user-attachments/assets/bad31f82-37c3-4efd-b20b-ab0db0b8bb33" />
 
