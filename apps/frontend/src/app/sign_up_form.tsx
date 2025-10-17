@@ -2,13 +2,13 @@
 import Link from 'next/link';
 import React from 'react';
 
-export default function LogInForm() {
+export default function SignUpForm() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-8">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-2">Sign in</h2>
-        <p className="text-gray-500 mb-6">Sign in to access your saved survey data</p>
+        <h2 className="text-2xl font-semibold text-gray-900 mb-2">Sign Up</h2>
+        <p className="text-gray-500 mb-6">Create an account to save your survey responses</p>
 
         <form onSubmit={(e) => e.preventDefault()}>
           <div>
@@ -36,13 +36,13 @@ export default function LogInForm() {
               type="submit"
               className="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium py-2.5 rounded-lg transition"
             >
-              Sign In
+              Create Account
             </button>
           </div>
 
           <p className="text-center text-sm text-gray-600 mt-6">
-            Don\'t have an account?{' '}
-            <Link href="/signup" className="text-indigo-600 hover:underline">Sign Up</Link>
+            Already have an account?{' '}
+            <Link href="/login" className="text-indigo-600 hover:underline">Sign In</Link>
           </p>
         </form>
 
