@@ -27,10 +27,6 @@ Here is the original Lovable [demo](https://lovable.dev/projects/ddfcee68-4795-4
 
 👉👉 View/comment on the design decisions [here](https://www.notion.so/Technical-Design-Decision-Document-28b250e4573880e7bf67dc5d701b48cf?source=copy_link).
 
-
-<img width="517" height="565" alt="Screenshot 2025-09-14 at 13 42 04" src="https://github.com/user-attachments/assets/bad31f82-37c3-4efd-b20b-ab0db0b8bb33" />
-
-
 ### 🛠️ Part 1: Core Platform Rebuild (Expected: October 14)
 **Key Tasks:**
 - Audit current stack (Supabase + Lovable + OpenAI API + GitHub) → Migrate to **Supabase + Typescript + Next.js + OpenAI Prompting**  
