@@ -14,6 +14,7 @@
     "e2e": "npx turbo run cypress"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/jest": "^30.0.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.0.0",
@@ -25,5 +26,8 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "cors": "^2.8.5"
   }
 }

@@ -127,7 +127,7 @@ export const getCurrentUser = async (req: Request, res: Response): Promise<void>
  * Note: This endpoint performs admin operations and should be protected or rate
  * limited in production. It uses the service role key on the server.
  */
-export const register = async (req: Request, res: Response): Promise<void> => {
+export const signup = async (req: Request, res: Response): Promise<void> => {
   try{
     console.log('\n===== Attempting to Register =====\n');
     const { email, password, name } = req.body;
