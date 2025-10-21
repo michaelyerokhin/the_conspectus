@@ -10,31 +10,31 @@ export default function SignUpForm() {
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
-  try {
-    const response = await fetch('http://localhost:3001/api/auth/signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const response = await fetch('http://localhost:3001/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
 
-    const data = await response.json();
-    console.log(data);
+      const data = await response.json();
+      console.log(data);
 
-    if (response.ok) {
-      // Save JWT in localStorage or cookie
-      localStorage.setItem('token', data.session.access_token);
-      setMessage('Account created successfully!');
+      if (response.ok) {
+        // Save JWT in localStorage or cookie
+        localStorage.setItem('token', data.session.access_token);
+        setMessage('Account created successfully!');
 
-      // Optionally redirect to dashboard or login
-      // router.push('/dashboard');
-    } else {
-      setMessage(data.message || 'Signup failed');
+        // Optionally redirect to dashboard or login
+        // router.push('/dashboard');
+      } else {
+        setMessage(data.message || 'Signup failed');
+      }
+    } catch (error) {
+      console.error(error);
+      setMessage('Server error. Try again.');
     }
-  } catch (error) {
-    console.error(error);
-    setMessage('Server error. Try again.');
-  }
-};
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
