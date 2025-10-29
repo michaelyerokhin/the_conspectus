@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 export default function LogInForm() {
@@ -14,12 +14,12 @@ export default function LogInForm() {
 
     try {
       const response = await fetch(
-        `${process.env.CRUD_BACKEND_URL}/api/auth/login`,
+        `${process.env.NEXT_PUBLIC_CRUD_BACKEND_URL}/api/auth/login`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password }),
-          credentials: 'include',
+          credentials: "include",
         }
       );
 
@@ -29,7 +29,7 @@ export default function LogInForm() {
       if (response.ok) {
         console.log("Login successful!");
         setMessage("Login successful!");
-        router.push('/');
+        router.push("/");
       } else {
         console.error(data.message || "Invalid credentials");
         setMessage(data.message || "Invalid credentials");
@@ -43,9 +43,9 @@ export default function LogInForm() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-8">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-2">Sign in</h2>
+        <h2 className="text-2xl font-semibold text-gray-900 mb-2">Log in</h2>
         <p className="text-gray-500 mb-6">
-          Sign in to access your saved survey data
+          Log in to access your saved survey data
         </p>
 
         <form onSubmit={handleSubmit}>
@@ -82,7 +82,7 @@ export default function LogInForm() {
               type="submit"
               className="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium py-2.5 rounded-lg transition"
             >
-              Sign In
+              Log In
             </button>
           </div>
 

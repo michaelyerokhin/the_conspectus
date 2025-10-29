@@ -1,21 +1,29 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { CONTAINER_CLASS } from "../constants";
 import { navLinks } from "../data";
 import { SearchIcon, UserIcon } from "../icons";
+import { getCurrentUser } from "../../lib/auth";
 
-export function SiteHeader() {
+export async function SiteHeader() {
+  const user = await getCurrentUser();
+  console.log("User: ", user);
+
   return (
     <header className="sticky top-0 z-50 border-b border-transparent bg-white/70 backdrop-blur-xl">
-      <div
-        className={`${CONTAINER_CLASS} flex items-center gap-4 py-4`}
-      >
+      <div className={`${CONTAINER_CLASS} flex items-center gap-4 py-4`}>
         <a
           className="flex flex-shrink-0 items-center gap-3 text-lg font-semibold text-slate-900"
           href="#"
         >
           <span className="grid h-10 w-10 place-items-center rounded-2xl border border-slate-200 bg-white shadow-sm shadow-slate-900/10">
-            <Image alt="Conspectus" height={24} src="/conspectus-logo.png" width={24} />
+            <Image
+              alt="Conspectus"
+              height={24}
+              src="/conspectus-logo.png"
+              width={24}
+            />
           </span>
           Conspectus
         </a>
@@ -38,15 +46,28 @@ export function SiteHeader() {
         <div className="ml-auto flex items-center gap-2">
           <button className="hidden items-center gap-2 rounded-full border border-slate-200/80 bg-white/80 px-4 py-2 text-sm font-medium text-slate-600 shadow-sm transition hover:-translate-y-[1px] hover:border-slate-300 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900/10 max-[1387px]:hidden lg:flex">
             <SearchIcon />
-            Search profiles
+            Profiles
           </button>
           <button className="inline-flex items-center gap-2 rounded-full border border-slate-900/10 bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-[0_12px_24px_rgba(15,23,42,0.25)] transition hover:-translate-y-[1px] hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900/30">
             Take Quiz
           </button>
-          <button className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 shadow-sm transition hover:-translate-y-[1px] hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900/10">
-            <UserIcon />
-            <span className="sr-only">Account</span>
-          </button>
+          {user ? (
+            <Link
+              href="/"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-sm font-semibold text-slate-700 shadow-sm transition hover:-translate-y-[1px] hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900/10"
+            >
+              {<UserIcon />}
+              <span className="sr-only">View account</span>
+            </Link>
+          ) : (
+            <Link
+              href="/login"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-600 shadow-sm transition hover:-translate-y-[1px] hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900/10"
+            >
+              <UserIcon />
+              Log In
+            </Link>
+          )}
         </div>
       </div>
     </header>

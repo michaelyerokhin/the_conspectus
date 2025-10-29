@@ -14,7 +14,7 @@ export default function SignUpForm() {
 
     try {
       const response = await fetch(
-        `${process.env.CRUD_BACKEND_URL}/api/auth/signup`,
+        `${process.env.NEXT_PUBLIC_CRUD_BACKEND_URL}/api/auth/signup`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -93,7 +93,7 @@ export default function SignUpForm() {
           <p className="text-center text-sm text-gray-600 mt-6">
             Already have an account?{" "}
             <Link href="/login" className="text-indigo-600 hover:underline">
-              Sign In
+              Log In
             </Link>
           </p>
         </form>
