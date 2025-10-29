@@ -1,6 +1,6 @@
-import { Request, Response } from 'express';
-import { supabaseAdmin } from '../config/supabase';
-import { clearAuthCookies, setAuthCookies } from '../utils/authCookies';
+import { Request, Response } from "express";
+import { supabaseAdmin } from "../config/supabase";
+import { clearAuthCookies, setAuthCookies } from "../utils/authCookies";
 
 /**
  * Login endpoint.
@@ -22,18 +22,18 @@ import { clearAuthCookies, setAuthCookies } from '../utils/authCookies';
  */
 export const login = async (req: Request, res: Response): Promise<void> => {
   try {
-    console.log('Attempting to login!');
+    console.log("Attempting to login!");
     const { email, password } = req.body;
 
     // Check if email and password exist
     if (!email || !password) {
-      console.error('Both Email and password are required!');
-      res.status(400).json({ error: 'Both Email and password are required' });
+      console.error("Both Email and password are required!");
+      res.status(400).json({ error: "Both Email and password are required" });
       return;
     }
 
     // Ask Supabase: is this email/password correct?
-    console.log('Attempting to login with Supabase now!');
+    console.log("Attempting to login with Supabase now!");
     const { data, error } = await supabaseAdmin.auth.signInWithPassword({
       email,
       password,
@@ -42,14 +42,14 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     // If login failed or shape is unexpected
     if (error || !data || !data.user || !data.session) {
       // prefer returning Supabase message in dev, but keep generic for production
-      const message = error?.message || 'Invalid email or password';
+      const message = error?.message || "Invalid email or password";
       console.error(`Error: ${message}`);
       res.status(401).json({ error: message });
       return;
     }
 
     // Success - send back user info and token
-    console.log('Logged in succesfully!');
+    console.log("Logged in succesfully!");
     setAuthCookies(res, data.session);
 
     res.status(200).json({
@@ -63,11 +63,10 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       },
     });
   } catch (error) {
-    console.error('Login error:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error("Login error:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
-
 
 /**
  * Get current authenticated user.
@@ -81,25 +80,30 @@ export const login = async (req: Request, res: Response): Promise<void> => {
  * - 404: user not found
  * - 500: internal server error
  */
-export const getCurrentUser = async (req: Request, res: Response): Promise<void> => {
+export const getCurrentUser = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
-    console.log('\n===== Attempting to get Current User! =====\n');
+    console.log("\n===== Attempting to get Current User! =====\n");
     if (!req.user) {
-      console.log('User not found in the request!');
-      res.status(401).json({ error: 'Not authenticated' });
+      console.log("User not found in the request!");
+      res.status(401).json({ error: "Not authenticated" });
       return;
     }
 
-    const { data, error } = await supabaseAdmin.auth.admin.getUserById(req.user.id);
+    const { data, error } = await supabaseAdmin.auth.admin.getUserById(
+      req.user.id
+    );
 
     if (error || !data || !data.user) {
-      const message = error?.message || 'User not found';
+      const message = error?.message || "User not found";
       console.log(`Error: ${message}`);
       res.status(404).json({ error: message });
       return;
     }
 
-    console.log('Succesfully found user!')
+    console.log("Succesfully found user!");
     res.status(200).json({
       user: {
         id: data.user.id,
@@ -107,11 +111,10 @@ export const getCurrentUser = async (req: Request, res: Response): Promise<void>
       },
     });
   } catch (error) {
-    console.error('Get current user error:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error("Get current user error:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
-
 
 /**
  * Register endpoint.
@@ -128,13 +131,13 @@ export const getCurrentUser = async (req: Request, res: Response): Promise<void>
  * limited in production. It uses the service role key on the server.
  */
 export const signup = async (req: Request, res: Response): Promise<void> => {
-  try{
-    console.log('\n===== Attempting to Register =====\n');
+  try {
+    console.log("\n===== Attempting to Register =====\n");
     const { email, password, name } = req.body;
 
     if (!email || !password) {
-      console.log('No email or password!');
-      res.status(400).json({ error: 'Email and password are required' });
+      console.log("No email or password!");
+      res.status(400).json({ error: "Email and password are required" });
       return;
     }
     const { data, error } = await supabaseAdmin.auth.admin.createUser({
@@ -142,24 +145,25 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
       password,
       email_confirm: true,
       user_metadata: {
-        name: name || '',
+        name: name || "",
       },
     });
 
     if (error || !data || !data.user) {
-      const message = error?.message || 'Failed to create user';
+      const message = error?.message || "Failed to create user";
       res.status(400).json({ error: message });
       return;
     }
 
-    console.log('Attepmting to register with Supabase now!');
-    const { data: sessionData, error: signInError } = await supabaseAdmin.auth.signInWithPassword({
-      email,
-      password,
-    });
+    console.log("Attepmting to register with Supabase now!");
+    const { data: sessionData, error: signInError } =
+      await supabaseAdmin.auth.signInWithPassword({
+        email,
+        password,
+      });
 
     if (signInError || !sessionData || !sessionData.session) {
-      const message = signInError?.message || 'Failed to sign in new user';
+      const message = signInError?.message || "Failed to sign in new user";
       console.log(`Error: ${error}`);
       res.status(400).json({ error: message });
       return;
@@ -171,7 +175,7 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
       user: {
         id: data.user.id,
         email: data.user.email,
-        name: data.user.user_metadata?.name || '',
+        name: data.user.user_metadata?.name || "",
       },
       session: {
         access_token: sessionData.session.access_token,
@@ -179,11 +183,11 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
       },
     });
 
-    console.log('Succesfully registered user!');
+    console.log("Succesfully registered user!");
   } catch (error) {
-    console.error('Register error:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }  
+    console.error("Register error:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 };
 
 /**
@@ -196,14 +200,14 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
  * - 500: failed to revoke session
  */
 export const logout = async (_req: Request, res: Response): Promise<void> => {
-	try {
-    console.log('Attempting to logout now!');
-		clearAuthCookies(res);
-    console.log('Logged out succesfully!');
-		res.status(204).send();
-	} catch (error) {
-		console.error('Logout error:', error);
-		clearAuthCookies(res);
-		res.status(500).json({ error: 'Internal server error' });
-	}
+  try {
+    console.log("Attempting to logout now!");
+    clearAuthCookies(res);
+    console.log("Logged out succesfully!");
+    res.status(204).send();
+  } catch (error) {
+    console.error("Logout error:", error);
+    clearAuthCookies(res);
+    res.status(500).json({ error: "Internal server error" });
+  }
 };

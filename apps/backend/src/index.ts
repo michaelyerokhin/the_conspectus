@@ -1,33 +1,39 @@
-
-import express from 'express';
-import authRoutes from './routes/auth.routes';
-import userRoutes from './routes/user.routes';
-import cors from 'cors';
+import "dotenv/config";
+import express from "express";
+import authRoutes from "./routes/auth.routes";
+import userRoutes from "./routes/user.routes";
+import cors from "cors";
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const port = process.env.PORT;
 
 app.use(express.json());
 
-app.use(cors({
-  origin: 'http://localhost:3000', // your frontend URL
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
-}));
+if (!process.env.CRUD_BACKEND_URL || !process.env.CLIENT_ORIGIN) {
+  throw new Error("One or more origins are not defined in the .env file!");
+}
 
-app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
+app.use(
+  cors({
+    origin: process.env.CLIENT_ORIGIN,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
-app.get('/health', (req, res) => {
-  res.json({ 
-    status: 'ok', 
-    message: 'Server is running',
-    timestamp: new Date().toISOString()
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+
+app.get("/health", (_, res) => {
+  res.json({
+    status: "ok",
+    message: "Server is running",
+    timestamp: new Date().toISOString(),
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-  console.log(`Test it: http://localhost:${PORT}/health`);
-  console.log(`Login: POST http://localhost:${PORT}/api/auth/login`);
+app.listen(port, () => {
+  console.log(`Server running on: ${process.env.CRUD_BACKEND_URL}`);
+  console.log(`Client origin: ${process.env.CLIENT_ORIGIN}`);
+  console.log(`Health: ${process.env.CRUD_BACKEND_URL}/health`);
 });
