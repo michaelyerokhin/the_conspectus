@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "./config/loadEnv";
 import express from "express";
 import authRoutes from "./routes/auth.routes";
 import userRoutes from "./routes/user.routes";
