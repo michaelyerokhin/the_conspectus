@@ -34,6 +34,7 @@ export const authenticateToken = async (
   try {
     console.log('\n===== Authenticating token =====\n');
     const authHeader = req.headers.authorization;
+    console.log(authHeader);
     let token = authHeader && authHeader.split(' ')[1];
 
     if (!token) {
