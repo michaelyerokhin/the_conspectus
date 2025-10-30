@@ -132,15 +132,12 @@ export const deleteUser = async (
 };
 
 /**
- * List users via Supabase Admin REST API.
- *
+ * List user profiles
  * Query params supported:
  * - limit: page size (max 500, default 100)
  * - offset: zero-based offset
  *
  * Returns: { users: Array, page, per_page }
- *
- * Requires SUPABASE_SERVICE_KEY and SUPABASE_URL in server environment.
  */
 export const listUsers = async (req: Request, res: Response): Promise<void> => {
   const limit = Math.min(
@@ -169,7 +166,6 @@ export const listUsers = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    // Admin REST returns an array of users; return with pagination metadata
     console.log("Users found succesfully!");
     res.status(200).json({ users, page, per_page });
   } catch (err) {
