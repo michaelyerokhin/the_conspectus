@@ -151,23 +151,6 @@ export const listUsers = async (req: Request, res: Response): Promise<void> => {
 
   try {
     console.log("\n===== Listing Users =====\n");
-    const serviceKey = process.env.SUPABASE_SERVICE_KEY;
-    const baseUrl = process.env.SUPABASE_URL;
-
-    if (!serviceKey || !baseUrl) {
-      console.log(
-        "Server misconfigured: SUPABASE_SERVICE_KEY or SUPABASE_URL missing"
-      );
-      res
-        .status(500)
-        .json({
-          error:
-            "Server misconfigured: SUPABASE_SERVICE_KEY or SUPABASE_URL missing",
-        });
-      return;
-    }
-
-    // Admin v1 supports pagination via page/per_page
     const page = Math.floor(offset / limit) + 1;
     const per_page = limit;
 
