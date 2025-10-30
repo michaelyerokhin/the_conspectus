@@ -25,30 +25,25 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     console.log("Attempting to login!");
     const { email, password } = req.body;
 
-    // Check if email and password exist
     if (!email || !password) {
       console.error("Both Email and password are required!");
       res.status(400).json({ error: "Both Email and password are required" });
       return;
     }
 
-    // Ask Supabase: is this email/password correct?
     console.log("Attempting to login with Supabase now!");
     const { data, error } = await supabaseAdmin.auth.signInWithPassword({
       email,
       password,
     });
 
-    // If login failed or shape is unexpected
     if (error || !data || !data.user || !data.session) {
-      // prefer returning Supabase message in dev, but keep generic for production
       const message = error?.message || "Invalid email or password";
       console.error(`Error: ${message}`);
       res.status(401).json({ error: message });
       return;
     }
 
-    // Success - send back user info and token
     console.log("Logged in succesfully!");
     setAuthCookies(res, data.session);
 
