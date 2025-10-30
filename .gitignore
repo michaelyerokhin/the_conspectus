@@ -21,3 +21,6 @@ turbo.log
 **/.lh/
 .lhignore/
 **/.lhignore/
+
+# Cookies text locally
+cookies.txt
