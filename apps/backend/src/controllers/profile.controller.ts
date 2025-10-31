@@ -1,22 +1,27 @@
-import { Request, Response } from "express";
+import type { Request, Response } from "express";
+import {
+  PublicProfileListResponseSchema,
+  PublicProfileResponseSchema,
+  type ProfileResponse,
+  type ProfileListResponse,
+} from "@shared/profile";
 import { supabaseAdmin } from "../config/supabase";
+import { sendErrorMessage } from "../utils/errors";
 
 /**
- * Get user profiles by first name (search).
+ * Get user profiles (all).
  *
- * Success (200): { profiles: [{ id, first_name, last_name }] }
+ * Success (200): { profiles: PublicProfile[] }
  * Errors:
- * - 200: profiles found
  * - 404: no profiles found
  * - 500: internal server error
  */
 export const getAllProfiles = async (
   _req: Request,
-  res: Response
-): Promise<void> => {
+  res: ProfileListResponse
+): Promise<void | Response> => {
   try {
     console.log("\n===== Getting all profiles =====\n");
-    console.log(`Searching Supabase for profiles now!`);
 
     const { data, error } = await supabaseAdmin
       .from("public_profiles")
@@ -24,21 +29,36 @@ export const getAllProfiles = async (
 
     if (error) {
       console.error("Supabase error:", error.message);
-      res.status(500).json({ error: error.message || "Supabase Error!" });
-      return;
+      return sendErrorMessage(res, 500, error.message, {
+        code: "SUPABASE_ERROR",
+      });
     }
 
     if (!data || data.length === 0) {
-      console.log("No profiles found!");
-      res.status(404).json({ error: "No matching profiles found" });
-      return;
+      console.log("[getAllProfiles] No profiles found!");
+      return sendErrorMessage(res, 404, "No matching profiles found");
     }
 
-    console.log(`Found ${data.length} profile(s)!`);
-    res.status(200).json({ profiles: data });
+    const parsed = PublicProfileListResponseSchema.safeParse({
+      profiles: data,
+    });
+    if (!parsed.success) {
+      console.error(
+        "[getAllProfiles] Unexpected profile shape",
+        parsed.error.flatten()
+      );
+      return sendErrorMessage(res, 500, "Invalid profile data returned", {
+        code: "INVALID_SCHEMA",
+      });
+    }
+
+    console.log(`Found ${parsed.data.profiles.length} profile(s)!`);
+    res.status(200).json(parsed.data);
   } catch (err) {
-    console.error("getAllProfiles error:", err);
-    res.status(500).json({ error: "Internal server error" });
+    console.error("[getAllProfiles] error:", err);
+    return sendErrorMessage(res, 500, "Internal server error", {
+      code: "INTERNAL_ERROR",
+    });
   }
 };
 
@@ -48,52 +68,61 @@ export const getAllProfiles = async (
  * Params:
  * - req.params.id: string
  *
- * Success (200): { user }  // === TODO: type this for later too ==== //
+ * Success (200): { profile: PublicProfile }
  * Errors:
  * - 400: missing id
  * - 404: user not found
  * - 500: internal server error
- *
- * Requires service role privileges (server-side only).
  */
 export const getProfileById = async (
   req: Request,
-  res: Response
-): Promise<void> => {
+  res: ProfileResponse
+): Promise<void | Response> => {
   try {
     console.log("\n===== Searching profiles by ID =====\n");
 
     const id = req.params.id;
     if (!id) {
-      console.error("ID is required!");
-      res.status(400).json({ error: "ID is required!" });
-      return;
+      console.error("[getProfileById] ID is required!");
+      return sendErrorMessage(res, 400, "ID is required");
     }
-
-    console.log(`Searching Supabase for ID: ${id}`);
 
     const { data, error } = await supabaseAdmin
       .from("public_profiles")
-      .select("id, first_name, last_name, globlalism")
+      .select("id, first_name, last_name, globalism")
       .eq("id", id)
       .single();
 
     if (error) {
-      console.error("Supabase error:", error.message);
-      res.status(500).json({ error: error.message || "Supabase Error!" });
-      return;
+      console.error("[getProfileById] Supabase error:", error.message);
+      return sendErrorMessage(res, 500, error.message, {
+        code: "SUPABASE_ERROR",
+      });
     }
 
     if (!data) {
-      console.log("No profiles found!");
-      res.status(404).json({ error: "No matching profiles found" });
-      return;
+      console.log("[getProfileById] No matching profiles found");
+      return sendErrorMessage(res, 404, "No matching profiles found");
     }
 
-    res.status(200).json({ profiles: data });
+    const parsed = PublicProfileResponseSchema.safeParse({ profile: data });
+    if (!parsed.success) {
+      console.error(
+        "[getProfileById] Unexpected profile shape",
+        parsed.error.flatten()
+      );
+      return sendErrorMessage(res, 500, "Invalid profile data returned", {
+        code: "INVALID_SCHEMA",
+      });
+    }
+
+    console.log(`Found profile!`);
+    res.status(200).json(parsed.data);
   } catch (err) {
-    console.error("getProfileById error:", err);
-    res.status(500).json({ error: "Internal server error" });
+    console.error("[getProfileById] error:", err);
+    return sendErrorMessage(res, 500, "Internal server error", {
+      code: "INTERNAL_ERROR",
+    });
   }
 };
 
@@ -103,7 +132,7 @@ export const getProfileById = async (
  * Query params:
  * - req.query.name: string
  *
- * Success (200): { profiles: [{ id, first_name, last_name }] }
+ * Success (200): { profiles: PublicProfile[] }
  * Errors:
  * - 400: missing name
  * - 404: no profiles found
@@ -111,19 +140,19 @@ export const getProfileById = async (
  */
 export const getProfilesByFirstName = async (
   req: Request,
-  res: Response
-): Promise<void> => {
+  res: ProfileListResponse
+): Promise<void | Response> => {
   try {
     console.log("\n===== Searching profiles by first name =====\n");
 
-    const name = req.query.name?.toString();
+    const rawName = Array.isArray(req.query.name)
+      ? req.query.name[0]
+      : req.query.name;
+    const name = rawName?.toString().trim();
     if (!name) {
-      console.error("Name is required!");
-      res.status(400).json({ error: "Name is required!" });
-      return;
+      console.error("[getProfilesByFirstName] Name is required!");
+      return sendErrorMessage(res, 400, "Name is required");
     }
-
-    console.log(`Searching Supabase for name: ${name}`);
 
     const { data, error } = await supabaseAdmin
       .from("public_profiles")
@@ -132,21 +161,35 @@ export const getProfilesByFirstName = async (
       .limit(10);
 
     if (error) {
-      console.error("Supabase error:", error.message);
-      res.status(500).json({ error: error.message || "Supabase Error!" });
-      return;
+      console.error("[getProfilesByFirstName] Supabase error:", error.message);
+      return sendErrorMessage(res, 500, error.message, {
+        code: "SUPABASE_ERROR",
+      });
     }
 
     if (!data || data.length === 0) {
-      console.log("No profiles found!");
-      res.status(404).json({ error: "No matching profiles found" });
-      return;
+      return sendErrorMessage(res, 404, "No matching profiles found");
+    }
+
+    const parsed = PublicProfileListResponseSchema.safeParse({
+      profiles: data,
+    });
+    if (!parsed.success) {
+      console.error(
+        "[getProfilesByFirstName] Unexpected profile shape",
+        parsed.error.flatten()
+      );
+      return sendErrorMessage(res, 500, "Invalid profile data returned", {
+        code: "INVALID_SCHEMA",
+      });
     }
 
     console.log(`Found ${data.length} profile(s)!`);
-    res.status(200).json({ profiles: data });
+    res.status(200).json(parsed.data);
   } catch (err) {
-    console.error("getProfilesByFirstName error:", err);
-    res.status(500).json({ error: "Internal server error" });
+    console.error("[getProfilesByFirstName] error:", err);
+    return sendErrorMessage(res, 500, "Internal server error", {
+      code: "INTERNAL_ERROR",
+    });
   }
 };
