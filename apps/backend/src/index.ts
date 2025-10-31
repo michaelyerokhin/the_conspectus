@@ -2,6 +2,7 @@ import "./config/loadEnv";
 import express from "express";
 import authRoutes from "./routes/auth.routes";
 import userRoutes from "./routes/user.routes";
+import profileRoutes from "./routes/profile.routes";
 import cors from "cors";
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/profiles", profileRoutes);
 
 app.get("/health", (_, res) => {
   res.json({
