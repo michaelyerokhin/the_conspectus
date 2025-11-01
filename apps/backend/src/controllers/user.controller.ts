@@ -1,5 +1,12 @@
 import { Request, Response } from "express";
+import {
+  PublicUserListResponseSchema,
+  PublicUserResponseSchema,
+  type UserResponse,
+  type UserListResponse,
+} from "@shared/user";
 import { supabaseAdmin } from "../config/supabase";
+import { sendErrorMessage } from "../utils/errors";
 
 /**
  * Get a user by id (admin).
@@ -16,32 +23,56 @@ import { supabaseAdmin } from "../config/supabase";
  *
  * Requires service role privileges (server-side only).
  */
-export const getUser = async (req: Request, res: Response): Promise<void> => {
+export const getUserById = async (
+  req: Request,
+  res: UserResponse
+): Promise<void | Response> => {
   try {
-    console.log("\n===== Getting a specific user =====\n");
+    console.log("\n===== [getUserById] Getting a specific user =====\n");
     const { id } = req.params;
     if (!id) {
-      console.error("User id is required!");
-      res.status(400).json({ error: "User id is required!" });
-      return;
+      console.error("[getUserById] User id is required!");
+      return sendErrorMessage(res, 400, "[getUserById] User id is required!");
     }
 
-    console.log("Getting user from Supabase now!");
-    const { data, error } = await supabaseAdmin.auth.admin.getUserById(id);
-    console.log({ data, error });
+    console.log("[getUserById] Getting user from Supabase now!");
+    const { data, error } = await supabaseAdmin
+      .from("profiles")
+      .select("*")
+      .eq("id", id)
+      .single();
 
-    if (error || !data || !data.user) {
-      const message = error?.message || "User not found";
-      console.error(`Error: ${message}`);
-      res.status(404).json({ error: message });
-      return;
+    if (error || !data) {
+      const message = error?.message || "[getUserById] User not found";
+      console.error(`[getUserById] Error: ${message}`);
+      return sendErrorMessage(res, 404, message, {
+        code: "USER_NOT_FOUND",
+      });
     }
 
-    console.log("Succesfully found user!");
-    res.status(200).json({ user: data.user });
+    console.log("[getUserById] Succesfully found user!");
+    console.log("[getUserById] Parsing user now!");
+    const parsed = PublicUserResponseSchema.safeParse({ user: data });
+
+    if (!parsed.success) {
+      console.error("[getUserById] Unexpected user shape", parsed.error.flatten());
+      return sendErrorMessage(
+        res,
+        500,
+        "[getUserById] Invalid user data returned",
+        {
+          code: "INVALID_SCHEMA",
+        }
+      );
+    }
+
+    console.log(`[getUserById] Found user!`);
+    return res.status(200).json(parsed.data);
   } catch (err) {
-    console.error("getUser error:", err);
-    res.status(500).json({ error: "Internal server error" });
+    console.error("[getUserById] error:", err);
+    return sendErrorMessage(res, 500, "[getUserById] Internal server error", {
+      code: "INTERNAL_ERROR",
+    });
   }
 };
 
@@ -61,32 +92,59 @@ export const getUser = async (req: Request, res: Response): Promise<void> => {
  */
 export const updateUser = async (
   req: Request,
-  res: Response
-): Promise<void> => {
+  res: UserResponse
+): Promise<void | Response> => {
   try {
-    console.log("\n===== Updating User =====\n");
+    console.log("\n===== [updateUser] Updating User =====\n");
     const { id } = req.params;
     const updates = req.body;
     if (!id) {
-      res.status(400).json({ error: "User id is required" });
-      return;
+      console.error("[updateUser] User id is required!");
+      return sendErrorMessage(res, 400, "[updateUser] User id is required");
     }
 
-    const { data, error } = await supabaseAdmin.auth.admin.updateUserById(
-      id,
-      updates
-    );
-    if (error || !data || !data.user) {
-      const message = error?.message || "Failed to update user";
-      res.status(400).json({ error: message });
-      return;
+    console.log("[updateUser] Updating user with Supabase now!");
+    const { data, error } = await supabaseAdmin
+      .from("profiles")
+      .update({
+        ...updates,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", id)
+      .select("*")
+      .single();
+
+    if (error || !data) {
+      const message = error?.message || "[updateUser] Failed to update user";
+      console.error(`[updateUser] Error: ${message}`);
+      return sendErrorMessage(res, 400, message);
     }
 
-    console.log("Succesfully updated user!");
-    res.status(200).json({ user: data.user });
+    console.log("[updateUser] Succesfully updated user!");
+    console.log("[updateUser] Parsing user now!");
+    const parsed = PublicUserResponseSchema.safeParse({ user: data });
+    if (!parsed.success) {
+      console.error(
+        "[updateUser] Unexpected user shape",
+        parsed.error.flatten()
+      );
+      return sendErrorMessage(
+        res,
+        500,
+        "[updateUser] Invalid user data returned",
+        {
+          code: "INVALID_SCHEMA",
+        }
+      );
+    }
+
+    console.log("[updateUser] User updated and parsed succesfully!");
+    return res.status(200).json(parsed.data);
   } catch (err) {
-    console.error("updateUser error:", err);
-    res.status(500).json({ error: "Internal server error" });
+    console.error("[updateUser] error:", err);
+    return sendErrorMessage(res, 500, "[updateUser] Internal server error", {
+      code: "INTERNAL_ERROR",
+    });
   }
 };
 
@@ -105,41 +163,44 @@ export const updateUser = async (
  */
 export const deleteUser = async (
   req: Request,
-  res: Response
-): Promise<void> => {
+  res: UserResponse
+): Promise<void | Response> => {
   try {
-    console.log("\n===== Deleting User =====\n");
+    console.log("\n===== [deleteUser] Deleting User =====\n");
     const { id } = req.params;
     if (!id) {
-      console.error(`User id is required`);
-      res.status(400).json({ error: "User id is required" });
-      return;
+      console.error("[deleteUser] User id is required!");
+      return sendErrorMessage(res, 400, "[deleteUser] User id is required");
     }
 
-    const { error } = await supabaseAdmin.auth.admin.deleteUser(id);
+    console.log("[deleteUser] Deleting user with Supabase now!");
+    const { error } = await supabaseAdmin
+      .from("profiles")
+      .delete()
+      .eq("id", id);
     if (error) {
-      console.error(`Error: ${error}`);
-      res.status(400).json({ error: error.message });
-      return;
+      console.error(`[deleteUser] Error: ${error}`);
+      return sendErrorMessage(res, 400, error.message);
     }
 
-    console.log("Succesfully deleted user!");
+    console.log("[deleteUser] Succesfully deleted user!");
     res.status(204).send();
   } catch (err) {
-    console.error("deleteUser error:", err);
-    res.status(500).json({ error: "Internal server error" });
+    console.error("[deleteUser] error:", err);
+    return sendErrorMessage(res, 500, "[deleteUser] Internal server error", {
+      code: "INTERNAL_ERROR",
+    });
   }
 };
 
 /**
- * List user profiles
- * Query params supported:
- * - limit: page size (max 500, default 100)
- * - offset: zero-based offset
- *
- * Returns: { users: Array, page, per_page }
+ * List users
+ * Returns: { users: Array }
  */
-export const listUsers = async (req: Request, res: Response): Promise<void> => {
+export const listUsers = async (
+  req: Request,
+  res: UserListResponse
+): Promise<void | Response> => {
   const limit = Math.min(
     parseInt((req.query.limit as string) || "100", 10),
     500
@@ -147,29 +208,57 @@ export const listUsers = async (req: Request, res: Response): Promise<void> => {
   const offset = Math.max(parseInt((req.query.offset as string) || "0", 10), 0);
 
   try {
-    console.log("\n===== Listing Users =====\n");
-    const page = Math.floor(offset / limit) + 1;
-    const per_page = limit;
-
-    console.log("Fetching users from page:", page, "with limit:", per_page);
-    const {
-      data: { users },
-      error,
-    } = await supabaseAdmin.auth.admin.listUsers({
-      page: page,
-      perPage: per_page,
-    });
+    console.log("\n===== [listUsers] Listing Users =====\n");
+    console.log(
+      "[listUsers] Fetching users with limit:",
+      limit,
+      "offset:",
+      offset
+    );
+    const { data, error } = await supabaseAdmin
+      .from("profiles")
+      .select("*")
+      .range(offset, offset + limit - 1)
+      .order("created_at", { ascending: false });
 
     if (error) {
-      console.log("Error fetching users:", error);
-      res.status(500).json({ error: "Internal server error" });
-      return;
+      console.log("[listUsers] Error fetching users:", error);
+      return sendErrorMessage(res, 500, "[listUsers] Internal server error", {
+        code: "INTERNAL_ERROR",
+      });
     }
 
-    console.log("Users found succesfully!");
-    res.status(200).json({ users, page, per_page });
+    if (!data) {
+      console.log("[listUsers] No users found!");
+      return sendErrorMessage(res, 404, "[listUsers] No users found");
+    }
+
+    console.log("[listUsers] Users found succesfully!");
+    console.log("[listUsers] Parsing users now!");
+    const parsed = PublicUserListResponseSchema.safeParse({
+      users: data,
+    });
+    if (!parsed.success) {
+      console.error(
+        "[listUsers] Unexpected user shape",
+        parsed.error.flatten()
+      );
+      return sendErrorMessage(
+        res,
+        500,
+        "[listUsers] Invalid user data returned",
+        {
+          code: "INVALID_SCHEMA",
+        }
+      );
+    }
+
+    console.log("[listUsers] Users parsed and returned succesfully!");
+    return res.status(200).json(parsed.data);
   } catch (err) {
-    console.error("listUsers error:", err);
-    res.status(500).json({ error: "Internal server error" });
+    console.error("[listUsers] error:", err);
+    return sendErrorMessage(res, 500, "[listUsers] Internal server error", {
+      code: "INTERNAL_ERROR",
+    });
   }
 };

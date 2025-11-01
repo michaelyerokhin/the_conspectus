@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { supabaseAdmin } from "../config/supabase";
 import { clearAuthCookies, setAuthCookies } from "../utils/authCookies";
+import { sendErrorMessage } from "../utils/errors";
 
 /**
  * Login endpoint.
@@ -20,18 +21,20 @@ import { clearAuthCookies, setAuthCookies } from "../utils/authCookies";
  *
  * Note: This is a public endpoint (no auth required).
  */
-export const login = async (req: Request, res: Response): Promise<void> => {
+export const login = async (
+  req: Request,
+  res: Response
+): Promise<void | Response> => {
   try {
-    console.log("Attempting to login!");
+    console.log("[login] Attempting to login!");
     const { email, password } = req.body;
 
     if (!email || !password) {
-      console.error("Both Email and password are required!");
-      res.status(400).json({ error: "Both Email and password are required" });
-      return;
+      console.error("[login] Both Email and password are required!");
+      return sendErrorMessage(res, 400, "Both Email and password are required");
     }
 
-    console.log("Attempting to login with Supabase now!");
+    console.log("[login] Attempting to login with Supabase now!");
     const { data, error } = await supabaseAdmin.auth.signInWithPassword({
       email,
       password,
@@ -39,12 +42,11 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
     if (error || !data || !data.user || !data.session) {
       const message = error?.message || "Invalid email or password";
-      console.error(`Error: ${message}`);
-      res.status(401).json({ error: message });
-      return;
+      console.error(`[login] Error: ${message}`);
+      return sendErrorMessage(res, 401, message);
     }
 
-    console.log("Logged in succesfully!");
+    console.log("[login] Logged in succesfully!");
     setAuthCookies(res, data.session);
 
     res.status(200).json({
@@ -58,8 +60,10 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       },
     });
   } catch (error) {
-    console.error("Login error:", error);
-    res.status(500).json({ error: "Internal server error" });
+    console.error("[login] Login error:", error);
+    return sendErrorMessage(res, 500, "Internal server error", {
+      code: "INTERNAL_ERROR",
+    });
   }
 };
 
@@ -78,14 +82,13 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 export const getCurrentUser = async (
   req: Request,
   res: Response
-): Promise<void> => {
+): Promise<void | Response> => {
   try {
-    console.log("\n===== Attempting to get Current User! =====\n");
+    console.log("\n===== [getCurrentUser] Attempting to get Current User! =====\n");
     if (!req.user) {
-      console.log("User not found in the request!");
-      res.status(401).json({ error: "Not authenticated" });
-      return;
-    }
+      console.log("[getCurrentUser] User not found in the request!");
+      return sendErrorMessage(res, 401, "Not authenticated");
+    } 
 
     const { data, error } = await supabaseAdmin.auth.admin.getUserById(
       req.user.id
@@ -93,12 +96,11 @@ export const getCurrentUser = async (
 
     if (error || !data || !data.user) {
       const message = error?.message || "User not found";
-      console.log(`Error: ${message}`);
-      res.status(404).json({ error: message });
-      return;
+      console.log(`[getCurrentUser] Error: ${message}`);
+      return sendErrorMessage(res, 404, message);
     }
 
-    console.log("Succesfully found user!");
+    console.log("[getCurrentUser] Succesfully found user!");
     res.status(200).json({
       user: {
         id: data.user.id,
@@ -106,8 +108,10 @@ export const getCurrentUser = async (
       },
     });
   } catch (error) {
-    console.error("Get current user error:", error);
-    res.status(500).json({ error: "Internal server error" });
+    console.error("[getCurrentUser] Get current user error:", error);
+    return sendErrorMessage(res, 500, "Internal server error", {
+      code: "INTERNAL_ERROR",
+    });
   }
 };
 
@@ -125,15 +129,14 @@ export const getCurrentUser = async (
  * Note: This endpoint performs admin operations and should be protected or rate
  * limited in production. It uses the service role key on the server.
  */
-export const signup = async (req: Request, res: Response): Promise<void> => {
+export const signup = async (req: Request, res: Response): Promise<void | Response> => {
   try {
-    console.log("\n===== Attempting to Register =====\n");
+    console.log("\n===== [signup] Attempting to Register =====\n");
     const { email, password, name } = req.body;
 
     if (!email || !password) {
-      console.log("No email or password!");
-      res.status(400).json({ error: "Email and password are required" });
-      return;
+      console.log("[signup] No email or password!");
+      return sendErrorMessage(res, 400, "[signup] Email and password are required");
     }
     const { data, error } = await supabaseAdmin.auth.admin.createUser({
       email,
@@ -146,11 +149,11 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
 
     if (error || !data || !data.user) {
       const message = error?.message || "Failed to create user";
-      res.status(400).json({ error: message });
-      return;
+      console.log(`[signup] Error: ${message}`);
+      return sendErrorMessage(res, 400, message);
     }
 
-    console.log("Attepmting to register with Supabase now!");
+    console.log("[signup] Attepmting to register with Supabase now!");
     const { data: sessionData, error: signInError } =
       await supabaseAdmin.auth.signInWithPassword({
         email,
@@ -159,9 +162,8 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
 
     if (signInError || !sessionData || !sessionData.session) {
       const message = signInError?.message || "Failed to sign in new user";
-      console.log(`Error: ${error}`);
-      res.status(400).json({ error: message });
-      return;
+      console.log(`[signup] Failed to sign in new user: ${message}`);
+      return sendErrorMessage(res, 400, message);
     }
 
     setAuthCookies(res, sessionData.session);
@@ -178,10 +180,12 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
       },
     });
 
-    console.log("Succesfully registered user!");
+    console.log("[signup] Succesfully registered user!");
   } catch (error) {
-    console.error("Register error:", error);
-    res.status(500).json({ error: "Internal server error" });
+    console.error("[signup] Register error:", error);
+    return sendErrorMessage(res, 500, "Internal server error", {
+      code: "INTERNAL_ERROR",
+    });
   }
 };
 
@@ -194,15 +198,16 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
  * Error responses:
  * - 500: failed to revoke session
  */
-export const logout = async (_req: Request, res: Response): Promise<void> => {
+export const logout = async (_req: Request, res: Response): Promise<void | Response> => {
   try {
-    console.log("Attempting to logout now!");
+    console.log("[logout] Attempting to logout now!");
     clearAuthCookies(res);
-    console.log("Logged out succesfully!");
+    console.log("[logout] Logged out succesfully!");
     res.status(204).send();
   } catch (error) {
-    console.error("Logout error:", error);
-    clearAuthCookies(res);
-    res.status(500).json({ error: "Internal server error" });
+    console.error("[logout] Logout error:", error);
+    return sendErrorMessage(res, 500, "Internal server error", {
+      code: "INTERNAL_ERROR",
+    });
   }
 };
