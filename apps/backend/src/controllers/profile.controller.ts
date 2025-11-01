@@ -21,21 +21,21 @@ export const getAllProfiles = async (
   res: ProfileListResponse
 ): Promise<void | Response> => {
   try {
-    console.log("\n===== Getting all profiles =====\n");
+    console.log("\n===== [getAllProfiles] Getting all profiles =====\n");
 
     const { data, error } = await supabaseAdmin
       .from("public_profiles")
       .select("id, first_name, last_name");
 
     if (error) {
-      console.error("Supabase error:", error.message);
+      console.error("[getAllProfiles] Supabase error:", error.message);
       return sendErrorMessage(res, 500, error.message, {
         code: "SUPABASE_ERROR",
       });
     }
 
     if (!data || data.length === 0) {
-      console.log("[getAllProfiles] No profiles found!");
+      console.log("[getAllProfiles] No matching profiles found!");
       return sendErrorMessage(res, 404, "No matching profiles found");
     }
 
@@ -44,7 +44,7 @@ export const getAllProfiles = async (
     });
     if (!parsed.success) {
       console.error(
-        "[getAllProfiles] Unexpected profile shape",
+        "[getAllProfiles] Unexpected profile shape:",
         parsed.error.flatten()
       );
       return sendErrorMessage(res, 500, "Invalid profile data returned", {
@@ -52,10 +52,10 @@ export const getAllProfiles = async (
       });
     }
 
-    console.log(`Found ${parsed.data.profiles.length} profile(s)!`);
+    console.log(`[getAllProfiles] Found ${parsed.data.profiles.length} profile(s)!`);
     res.status(200).json(parsed.data);
   } catch (err) {
-    console.error("[getAllProfiles] error:", err);
+    console.error("[getAllProfiles] Error:", err);
     return sendErrorMessage(res, 500, "Internal server error", {
       code: "INTERNAL_ERROR",
     });
@@ -79,7 +79,7 @@ export const getProfileById = async (
   res: ProfileResponse
 ): Promise<void | Response> => {
   try {
-    console.log("\n===== Searching profiles by ID =====\n");
+    console.log("\n===== [getProfileById] Searching profiles by ID =====\n");
 
     const id = req.params.id;
     if (!id) {
@@ -143,7 +143,7 @@ export const getProfilesByFirstName = async (
   res: ProfileListResponse
 ): Promise<void | Response> => {
   try {
-    console.log("\n===== Searching profiles by first name =====\n");
+    console.log("\n===== [getProfilesByFirstName] Searching profiles by first name =====\n");
 
     const rawName = Array.isArray(req.query.name)
       ? req.query.name[0]
