@@ -5,7 +5,7 @@ import type { Response } from "express";
 /** === Zod Schemas (runtime validation) === */
 const PublicProfileSchema = z
   .object({
-    id: z.string(),
+    id: z.string().uuid(),
     first_name: z.string(),
     last_name: z.string(),
     globalism: z.number().nullable().optional(),
