@@ -1,125 +1,34 @@
 import { useRouter } from 'next/navigation';
 import React, { useState } from "react";
-import  { View, Text, TextInput , Pressable, StyleSheet} from "react-native"; 
 
-export default function KnowledgeGraphScreen() {
+export default function KnowledgeGraph() {
+  const [input, setInput] = useState("Jensen Huang, Sam Altman");
 
-    const  [input, setInput] = useState("Jesen Huang , Sam Altman")
-    
-    return(
+  return (
+    <div>
+      <h1 className="text-3xl font-bold mb-2">Knowledge Graph</h1>
+      <p className="text-slate-500 mb-6">
+        Explore leaders through knowledge graph relationships and worldview analysis.
+      </p>
 
-     <View style={styles.container}>
-        <Text style ={styles.title}> Knowledge Graph </Text>
-        <Text style = {styles.subtitle}>
-            Explore leaders through knowledge graph relationships and worldview analysis.
-        </Text>
-        {/*Tabs*/}
+      <div className="flex gap-3 mb-4">
+        <button className="rounded-md bg-slate-200 px-4 py-2 font-medium">Graph</button>
+        <button className="rounded-md bg-slate-100 px-4 py-2 font-medium text-slate-500">Structured Search</button>
+        <button className="rounded-md bg-slate-100 px-4 py-2 font-medium text-slate-500">Knowledge Graph Search</button>
+        <button className="rounded-md bg-slate-100 px-4 py-2 font-medium text-slate-500">Situation Room</button>
+      </div>
 
-        <View style = {styles.tabRow}>
-            <Pressable style={[styles.tab, styles.activeTab]}>
-                <Text style = {styles.activeTabText}> Graph </Text>
-            </Pressable>
-
-            <Pressable style = {styles.tab}>
-                <Text  style = {styles.tabText}> Structured Search </Text>
-            </Pressable>
-
-            <Pressable style = {styles.tab}>
-                <Text style = {styles.tabText}> Knowledge Graph Search </Text>
-            </Pressable>
-
-            <Pressable style  = {styles.tab}>
-                <Text  style  = {styles.tabText} > Situation Room</Text>
-                </Pressable>
-        </View>
-
-        <TextInput
-        style= {styles.input}
-        value = {input}
-        onChangeText = {setInput}
-        placeholder ="Enter Names"
-        />
-        <Text style ={styles.logInText}>
-            <Text style= {{fontWeight : "600"}}>Log In </Text> to add yourself to the chart
-            </Text>
-
-        <Pressable style={styles.button}>
-            <Text style= {styles.buttonText}> Load Radar Chart </Text> 
-        </Pressable>
-     </View>
-    ); 
+      <input
+        className="w-full border rounded-md p-3 mb-3"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+      <p className="text-slate-500 mb-4">
+        <span className="font-semibold">Log in</span> to add yourself to the chart
+      </p>
+      <button className="w-full bg-slate-800 text-white rounded-md py-3 font-semibold">
+        Load Radar Chart
+      </button>
+    </div>
+  );
 }
-
-    const styles = StyleSheet.create({
-
-        container: {
-            flex: 1 ,
-            paddingHorizontal: 20,
-            paddingTop:  60 ,
-            backgroundColor: "fff",
-
-        },
-
-        title: {
-            fontSize:  28,
-            fontWeight: "700",
-            color: "#111",
-            marginBottom: 6 , 
-
-        },
-        subtitle: {
-            color: "6b7280",
-            marginBottom: 20, 
-            fontSize:  15, 
-        },
-        tabRow: {
-            flexDirection:"row", 
-            marginBottom:  20, 
-
-        },
-        tab:{
-            paddingVertical : 8 ,
-            paddingHorizontal : 12 , 
-            borderRadius : 6, 
-            marginRight:  10, 
-            backgroundColor  : "#f3f4f6",
-        },
-        activeTab:{
-            backgroundColor : "#e5e7eb",
-        },
-        tabText:{
-            color  : "#374151",
-
-        },
-        activeTabText: {
-            color : "#111827", 
-            fontWeight :  "600",
-
-        }, 
-        input :{
-            borderWidth: 1 , 
-            borderColor:  "e5e7eb",
-            borderRadius: 6 , 
-            padding: 12 , 
-            marginBottom: 10, 
-
-        },
-        logInText: {
-            color: "6b7280",
-            marginBottom : 20, 
-
-        }, 
-        button :{
-            backgroundColor  : "#1f2937",
-            borderRadius: 6, 
-            paddingVertical:  14 , 
-            alignItems  : "center", 
-
-        },
-        buttonText:{
-            color : "white" , 
-            fontWeight: "600",
-
-        },
-    });
-
