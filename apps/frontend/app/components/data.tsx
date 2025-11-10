@@ -292,3 +292,76 @@ export const profileIncludes = [
   "TL;DR brief for fast stakeholder alignment",
   "Comparison tools to map allies, rivals, and coalitions",
 ];
+
+export const mockPeopleData = [
+  {
+    slug: "sam-altman",
+    fullName: "Sam Altman",
+    axes: {
+      Globalism: 8,
+      AIRegulation: 7,
+      ClimateAction: 5,
+      TechSkepticism: 4,
+      CivilLiberties: 6,
+      MarketLiberalism: 8,
+      SecurityHawk: 3,
+      ImmigrationOpenness: 9,
+    },
+  },
+  {
+    slug: "jensen-huang",
+    fullName: "Jensen Huang",
+    axes: {
+      Globalism: 6,
+      AIRegulation: 5,
+      ClimateAction: 7,
+      TechSkepticism: 3,
+      CivilLiberties: 8,
+      MarketLiberalism: 7,
+      SecurityHawk: 4,
+      ImmigrationOpenness: 7,
+    },
+  },
+  {
+    slug: "elon-musk",
+    fullName: "Elon Musk",
+    axes: {
+      Globalism: 4,
+      AIRegulation: 6,
+      ClimateAction: 2,
+      TechSkepticism: 9,
+      CivilLiberties: 3,
+      MarketLiberalism: 8,
+      SecurityHawk: 6,
+      ImmigrationOpenness: 4,
+    },
+  },
+  {
+    slug: "sundar-pichai",
+    fullName: "Sundar Pichai",
+    axes: {
+      Globalism: 7,
+      AIRegulation: 5,
+      ClimateAction: 8,
+      TechSkepticism: 4,
+      CivilLiberties: 6,
+      MarketLiberalism: 7,
+      SecurityHawk: 3,
+      ImmigrationOpenness: 7,
+    },
+  },
+  {
+    slug: "satya-nadella",
+    fullName: "Satya Nadella",
+    axes: {
+      Globalism: 9,
+      AIRegulation: 6,
+      ClimateAction: 8,
+      TechSkepticism: 5,
+      CivilLiberties: 8,
+      MarketLiberalism: 6,
+      SecurityHawk: 3,
+      ImmigrationOpenness: 8,
+    },
+  },
+];

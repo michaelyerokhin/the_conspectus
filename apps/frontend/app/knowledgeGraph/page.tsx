@@ -1,54 +1,39 @@
 "use client";
 
 import { useState } from "react";
-import RadarComparison from "../components/chart/RadarComparison"; 
+import Select from "react-select";
+import RadarComparison from "../components/chart/RadarComparison";
 import Link from "next/link";
+import { mockPeopleData } from "../components/data"; 
 
 export default function KnowledgeGraphPage() {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-  const [names, setNames] = useState("Jensen Huang, Sam Altman");
+  const [selectedPeople, setSelectedPeople] = useState<any[]>([]);
 
-  const handleLoadChart = () => {
+  const allPeople = mockPeopleData.map((p) => ({
+    value: p.slug,
+    label: p.fullName,
+  }));
+
+  const handleLoadChart = async () => {
+    if (selectedPeople.length === 0) return;
     setLoading(true);
-    const mock = [
-      {
-        slug: "sam-altman",
-        fullName: "Sam Altman",
-        axes: {
-          Globalism: 8,
-          AIRegulation: 7,
-          ClimateAction: 5,
-          TechSkepticism: 4,
-          CivilLiberties: 6,
-          MarketLiberalism: 8,
-          SecurityHawk: 3,
-          ImmigrationOpenness: 9,
-        },
-      },
-      {
-        slug: "jensen-huang",
-        fullName: "Jensen Huang",
-        axes: {
-          Globalism: 6,
-          AIRegulation: 5,
-          ClimateAction: 7,
-          TechSkepticism: 3,
-          CivilLiberties: 8,
-          MarketLiberalism: 7,
-          SecurityHawk: 4,
-          ImmigrationOpenness: 7,
-        },
-      },
-    ];
 
-    // Simulate fetch delay
-    setTimeout(() => {
-      setData(mock);
-      setLoading(false);
-    }, 800);
+    // Simulate fetching from an API or database
+    const mockFetch = new Promise((resolve) => {
+      setTimeout(() => {
+        const filtered = mockPeopleData.filter((p) =>
+          selectedPeople.some((sel) => sel.value === p.slug)
+        );
+        resolve(filtered);
+      }, 800);
+    });
+
+    const result: any = await mockFetch;
+    setData(result);
+    setLoading(false);
   };
-
   const axes = [
     "Globalism",
     "AIRegulation",
@@ -67,54 +52,57 @@ export default function KnowledgeGraphPage() {
         Explore leaders through knowledge graph relationships and worldview analysis.
       </p>
 
+      {/* Tabs Section */}
       <div className="flex gap-4 mb-6 border-b border-slate-200">
-        {["Graph", "Structured Search", "Knowledge Graph Search", "Situation Room"].map(
-          (tab) => (
-            <button
-              key={tab}
-              className={`px-4 py-2 text-sm font-medium rounded-t-md ${
-                tab === "Graph"
-                  ? "bg-white text-slate-900 border border-slate-200 border-b-transparent"
-                  : "text-slate-500 hover:text-slate-900"
-              }`}
-            >
-              {tab}
-            </button>
-          )
-        )}
+        {["Graph", "Structured Search", "Knowledge Graph Search", "Situation Room"].map((tab) => (
+          <button
+            key={tab}
+            className={`px-4 py-2 text-sm font-medium rounded-t-md ${
+              tab === "Graph"
+                ? "bg-white text-slate-900 border border-slate-200 border-b-transparent"
+                : "text-slate-500 hover:text-slate-900"
+            }`}
+          >
+            {tab}
+          </button>
+        ))}
       </div>
-
-      {/* Input Field */}
-      <input
-        type="text"
-        placeholder="Enter multiple names (e.g., Jensen Huang, Sam Altman)"
-        value={names}
-        onChange={(e) => setNames(e.target.value)}
-        className="w-full px-4 py-2 border border-slate-200 rounded-md mb-3 focus:outline-none focus:ring-2 focus:ring-slate-300"
+      <Select
+        isMulti
+        options={allPeople}
+        placeholder="Search and select leaders to compare..."
+        className="mb-4"
+        value={selectedPeople}
+        onChange={(selected) => setSelectedPeople([...(selected || [])])}
       />
-      
-      
-      <Link href = "/login"> 
-      <button className=" bg-white font-medium hover:bg-[#3c74f6] transition w-full px-4 py-2 border border-slate-200 rounded-md mb-3 focus:outline-none focus:ring-2 focus:ring-slate-300 hover:text-white"
-      >  
-      <p> Log in to add yourself </p>
-      </button>
-      </Link> 
-      
+      <Link href="/login">
+        <button className="flex items-center justify-center gap-2 bg-white font-medium hover:bg-[#3c74f6] transition w-full px-4 py-2 border border-slate-200 rounded-md mb-3 focus:outline-none focus:ring-2 focus:ring-slate-300 hover:text-white">
+          <span>Log in to add yourself</span>
+        </button>
+      </Link>
+
       <button
         onClick={handleLoadChart}
         disabled={loading}
         className="w-full py-3 bg-[#1e2631] text-white font-medium rounded-md hover:bg-[#111827] transition"
       >
-        {loading ? "Loading..." : "Load Radar Chart"}
+        {loading
+          ? "Loading..."
+          : selectedPeople.length > 0
+          ? `Load Radar Chart (${selectedPeople.length} ${
+              selectedPeople.length === 1 ? "figure" : "figures"
+            })`
+          : "Load Radar Chart"}
       </button>
 
       {/* Chart Section */}
       {data.length > 0 && (
         <div className="mt-10">
-          <h2 className="text-lg font-semibold mb-4">
-            Political Radar Chart Comparison
-          </h2>
+          <h2 className="text-lg font-semibold mb-1">Worldview Comparison</h2>
+          <p className="text-slate-600 mb-6">
+            The Knowledge Graph visualizes leaders' worldviews across major global dimensions
+            like technology, markets, and governance.
+          </p>
           <RadarComparison people={data} axes={axes} />
         </div>
       )}
