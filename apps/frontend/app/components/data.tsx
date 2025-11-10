@@ -43,10 +43,10 @@ export type FocusArea = {
 };
 
 export const navLinks = [
-  "Profiles",
-  "Compare",
-  "Knowledge Graph",
-  "About",
+  {name :"Profiles" , href : "#"},
+  {name : "Compare"  , href: "#",},
+  {name : "Knowledge Graph", href: "./knowledgeGraph", },
+  {name: "About", href :  "#"},
 ];
 
 /** === Obviously, we'll backend this eventually === */

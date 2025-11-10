@@ -29,14 +29,15 @@ export async function SiteHeader() {
 
         <nav className="hidden flex-1 items-center justify-center gap-6 text-sm font-medium text-slate-500 max-[1387px]:mx-auto max-[860px]:hidden md:flex">
           <ul className="flex items-center gap-6">
-            {navLinks.map((item) => (
-              <li key={item}>
-                <a
+            {navLinks.map((link) => (
+              <li key={link.name}>
+                <Link
+                  href= "./knowledgeGraph"
                   className="relative whitespace-nowrap transition hover:text-slate-900 after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:rounded-full after:bg-slate-900/70 after:transition-[width] hover:after:w-full"
-                  href="#"
+                  
                 >
-                  {item}
-                </a>
+                  {link.name}
+                </Link>
               </li>
             ))}
           </ul>

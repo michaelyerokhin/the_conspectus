@@ -28,7 +28,9 @@
     }
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.81.0",
     "cors": "^2.8.5",
-    "react-native": "^0.82.1"
+    "react-native": "^0.82.1",
+    "recharts": "^3.4.1"
   }
 }
