@@ -47,7 +47,7 @@ export default function KnowledgeGraphPage() {
 
   return (
     <div className="min-h-screen bg-[#f6f8fc] p-8">
-      <h1 className="text-3xl font-bold mb-2">Knowledge Graph</h1>
+      <h1 className="text-3xl font-bold mb-2 text-black">Knowledge Graph</h1>
       <p className="text-slate-600 mb-8">
         Explore leaders through knowledge graph relationships and worldview analysis.
       </p>
@@ -76,7 +76,7 @@ export default function KnowledgeGraphPage() {
         onChange={(selected) => setSelectedPeople([...(selected || [])])}
       />
       <Link href="/login">
-        <button className="flex items-center justify-center gap-2 bg-white font-medium hover:bg-[#3c74f6] transition w-full px-4 py-2 border border-slate-200 rounded-md mb-3 focus:outline-none focus:ring-2 focus:ring-slate-300 hover:text-white">
+        <button className="flex items-center justify-center gap-2 text-black bg-white font-medium hover:bg-[#3c74f6] transition w-full px-4 py-2 border border-slate-200 rounded-md mb-3 focus:outline-none focus:ring-2 focus:ring-slate-300 hover:text-white">
           <span>Log in to add yourself</span>
         </button>
       </Link>
