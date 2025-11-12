@@ -1,7 +1,14 @@
 import "./config/loadEnv";
-import express from "express";
+import express, {
+  type Request,
+  type Response,
+  type NextFunction,
+} from "express";
 import authRoutes from "./routes/auth.routes";
 import userRoutes from "./routes/user.routes";
+import profileRoutes from "./routes/profile.routes";
+import { sendErrorMessage } from "./utils/errors";
+
 import cors from "cors";
 
 const app = express();
@@ -23,6 +30,7 @@ app.use(
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/profiles", profileRoutes);
 
 app.get("/health", (_, res) => {
   res.json({
@@ -31,6 +39,15 @@ app.get("/health", (_, res) => {
     timestamp: new Date().toISOString(),
   });
 });
+
+app.use(
+  (err: unknown, _req: Request, res: Response, _next: NextFunction): void => {
+    console.error("Unhandled error:", err);
+    sendErrorMessage(res, 500, "Internal server error", {
+      details: { stack: err instanceof Error ? err.stack : err },
+    });
+  }
+);
 
 app.listen(port, () => {
   console.log(`Server running on: ${process.env.CRUD_BACKEND_URL}`);
