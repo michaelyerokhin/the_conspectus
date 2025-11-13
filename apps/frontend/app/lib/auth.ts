@@ -1,8 +1,9 @@
 import "server-only";
+import { cache } from "react";
 import { cookies } from "next/headers";
 import type { CurrentUser } from "./types";
 
-export async function getCurrentUser(): Promise<CurrentUser | null> {
+export const getCurrentUser = cache(async (): Promise<CurrentUser | null> => {
   const apiOrigin = process.env.NEXT_PUBLIC_CRUD_BACKEND_URL;
 
   if (!apiOrigin) {
@@ -38,4 +39,4 @@ export async function getCurrentUser(): Promise<CurrentUser | null> {
     console.error("[auth] Failed to retrieve current user", error);
     return null;
   }
-}
+});

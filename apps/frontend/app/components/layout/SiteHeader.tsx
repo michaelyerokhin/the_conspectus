@@ -4,11 +4,9 @@ import Link from "next/link";
 import { CONTAINER_CLASS } from "../constants";
 import { navLinks } from "../data";
 import { SearchIcon, UserIcon } from "../icons";
-import { getCurrentUser } from "../../lib/auth";
 import type { CurrentUser } from "../../lib/types";
 
-export async function SiteHeader() {
-  const user : CurrentUser | null = await getCurrentUser();
+export async function SiteHeader({ currentUser }: { currentUser: CurrentUser | null }) {
   return (
     <header className="sticky top-0 z-50 border-b border-transparent bg-[#f6f8fc] backdrop-blur-xl">
       <div className={`${CONTAINER_CLASS} flex items-center gap-4 py-4`}>
@@ -51,7 +49,7 @@ export async function SiteHeader() {
           <button className="inline-flex items-center gap-2 rounded-full border border-slate-900/10 bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-[0_12px_24px_rgba(15,23,42,0.25)] transition hover:-translate-y-[1px] hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900/30">
             Take Quiz
           </button>
-          {user ? (
+          {currentUser ? (
             <Link
               href="/"
               className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-sm font-semibold text-slate-700 shadow-sm transition hover:-translate-y-[1px] hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900/10"
