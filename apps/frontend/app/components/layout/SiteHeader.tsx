@@ -12,9 +12,9 @@ export async function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-transparent bg-[#f6f8fc] backdrop-blur-xl">
       <div className={`${CONTAINER_CLASS} flex items-center gap-4 py-4`}>
-        <a
+        <Link
           className="flex flex-shrink-0 items-center gap-3 text-lg font-semibold text-slate-900"
-          href="#"
+          href="/"
         >
           <span className="grid h-10 w-10 place-items-center rounded-2xl border border-slate-200 bg-white shadow-sm shadow-slate-900/10">
             <Image
@@ -25,7 +25,7 @@ export async function SiteHeader() {
             />
           </span>
           Conspectus
-        </a>
+        </Link>
 
         <nav className="hidden flex-1 items-center justify-center gap-6 text-sm font-medium text-slate-500 max-[1387px]:mx-auto max-[860px]:hidden md:flex">
           <ul className="flex items-center gap-6">
