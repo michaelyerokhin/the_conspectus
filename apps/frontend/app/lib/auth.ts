@@ -1,10 +1,6 @@
 import "server-only";
 import { cookies } from "next/headers";
-
-export type CurrentUser = {
-  id: string;
-  email: string;
-};
+import type { CurrentUser } from "./types";
 
 export async function getCurrentUser(): Promise<CurrentUser | null> {
   const apiOrigin = process.env.NEXT_PUBLIC_CRUD_BACKEND_URL;

@@ -5,10 +5,10 @@ import { CONTAINER_CLASS } from "../constants";
 import { navLinks } from "../data";
 import { SearchIcon, UserIcon } from "../icons";
 import { getCurrentUser } from "../../lib/auth";
+import type { CurrentUser } from "../../lib/types";
 
 export async function SiteHeader() {
-  const user = await getCurrentUser();
-
+  const user : CurrentUser | null = await getCurrentUser();
   return (
     <header className="sticky top-0 z-50 border-b border-transparent bg-[#f6f8fc] backdrop-blur-xl">
       <div className={`${CONTAINER_CLASS} flex items-center gap-4 py-4`}>
