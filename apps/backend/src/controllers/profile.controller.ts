@@ -25,7 +25,7 @@ export const getAllProfiles = async (
 
     const { data, error } = await supabaseAdmin
       .from("public_profiles")
-      .select("id, first_name, last_name");
+      .select("*");
 
     if (error) {
       console.error("[getAllProfiles] Supabase error:", error.message);
@@ -52,7 +52,9 @@ export const getAllProfiles = async (
       });
     }
 
-    console.log(`[getAllProfiles] Found ${parsed.data.profiles.length} profile(s)!`);
+    console.log(
+      `[getAllProfiles] Found ${parsed.data.profiles.length} profile(s)!`
+    );
     res.status(200).json(parsed.data);
   } catch (err) {
     console.error("[getAllProfiles] Error:", err);
@@ -143,7 +145,9 @@ export const getProfilesByFirstName = async (
   res: ProfileListResponse
 ): Promise<void | Response> => {
   try {
-    console.log("\n===== [getProfilesByFirstName] Searching profiles by first name =====\n");
+    console.log(
+      "\n===== [getProfilesByFirstName] Searching profiles by first name =====\n"
+    );
 
     const rawName = Array.isArray(req.query.name)
       ? req.query.name[0]
