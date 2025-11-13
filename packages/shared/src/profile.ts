@@ -8,7 +8,14 @@ const PublicProfileSchema = z
     id: z.string().uuid(),
     first_name: z.string(),
     last_name: z.string(),
-    globalism: z.number().nullable().optional(),
+    establishment_alignment: z.number().nullable().optional(),
+    governance_style: z.number().nullable().optional(),
+    market_policy: z.number().nullable().optional(),
+    environmental_approach: z.number().nullable().optional(),
+    social_policy: z.number().nullable().optional(),
+    individualism: z.number().nullable().optional(),
+    innovation_approach: z.number().nullable().optional(),
+    international_outlook: z.number().nullable().optional(),
   })
   .strict(); /** Disallow unknown keys! */
 
@@ -23,6 +30,7 @@ export const PublicProfileListResponseSchema = z.object({
 });
 
 /** === Inferred Types (compile-time only) === */
+export type PublicProfile = z.infer<typeof PublicProfileSchema>;
 type PublicProfileResponse = z.infer<typeof PublicProfileResponseSchema>;
 type PublicProfileListResponse = z.infer<
   typeof PublicProfileListResponseSchema

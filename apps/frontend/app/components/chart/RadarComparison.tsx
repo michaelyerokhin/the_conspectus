@@ -9,29 +9,27 @@ import {
   Radar,
   Legend,
 } from "recharts";
-
-interface PersonData {
-  slug: string;
-  fullName: string;
-  axes: Record<string, number>;
-}
+import type { PublicProfile } from "@shared/profile";
+import { getFullName, AXIS_NAMES, AXIS_MAPPING } from "@/lib/profileUtils";
 
 interface RadarComparisonProps {
-  people: PersonData[];
-  axes: string[];
+  people: PublicProfile[];
 }
 
-export default function RadarComparison({ people, axes }: RadarComparisonProps) {
-  // Transform data for Recharts
-  const chartData = axes.map((axis) => {
-    const point: any = { axis };
-    people.forEach((p) => {
-      point[p.fullName] = p.axes[axis];
+export default function RadarComparison({
+  people,
+}: RadarComparisonProps) {
+  const chartData = AXIS_NAMES.map((axis) => {
+    const point: Record<string, string | number> = { axis };
+    people.forEach((person) => {
+      const fullName = getFullName(person);
+      const schemaField = AXIS_MAPPING[axis as keyof typeof AXIS_MAPPING];
+      point[fullName] = (person[schemaField as keyof PublicProfile] as number) ?? 0;
     });
     return point;
   });
 
-  const colors = ["#2563eb", "#dc2626", "#16a34a", "#9333ea"]; // You can add more if needed
+  const colors = ["#2563eb", "#dc2626", "#16a34a", "#9333ea"];
 
   return (
     <div className="bg-white rounded-lg p-6 shadow-sm">
@@ -40,21 +38,24 @@ export default function RadarComparison({ people, axes }: RadarComparisonProps) 
           <PolarGrid />
           <PolarAngleAxis dataKey="axis" />
           <PolarRadiusAxis domain={[0, 10]} />
-          {people.map((person, i) => (
-            <Radar
-              key={person.slug}
-              name={person.fullName}
-              dataKey={person.fullName}
-              stroke={colors[i % colors.length]}
-              fill={colors[i % colors.length]}
-              fillOpacity={0.4}
-            />
-          ))}
+          {people.map((person, i) => {
+            const fullName = getFullName(person);
+            return (
+              <Radar
+                key={person.id}
+                name={fullName}
+                dataKey={fullName}
+                stroke={colors[i % colors.length]}
+                fill={colors[i % colors.length]}
+                fillOpacity={0.4}
+              />
+            );
+          })}
           <Legend />
         </RadarChart>
       </ResponsiveContainer>
       <p className="text-center text-sm text-gray-500 mt-2">
-        Scale: 0 (center) to 10 (outer edge)
+        Scale: 0 to 10
       </p>
     </div>
   );
