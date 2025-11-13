@@ -29,7 +29,8 @@ export default function LogInForm() {
       if (response.ok) {
         console.log("Login successful!");
         setMessage("Login successful!");
-        router.push("/");
+        await router.replace("/");
+        router.refresh();
       } else {
         console.error(data.message || "Invalid credentials");
         setMessage(data.message || "Invalid credentials");

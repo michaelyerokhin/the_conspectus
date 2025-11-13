@@ -44,7 +44,6 @@ export type FocusArea = {
 
 export const navLinks = [
   {name :"Profiles" , href : "#"},
-  {name : "Compare"  , href: "#",},
   {name : "Knowledge Graph", href: "./knowledgeGraph", },
   {name: "About", href :  "#"},
 ];

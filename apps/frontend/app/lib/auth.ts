@@ -1,12 +1,9 @@
 import "server-only";
+import { cache } from "react";
 import { cookies } from "next/headers";
+import type { CurrentUser } from "./types";
 
-export type CurrentUser = {
-  id: string;
-  email: string;
-};
-
-export async function getCurrentUser(): Promise<CurrentUser | null> {
+export const getCurrentUser = cache(async (): Promise<CurrentUser | null> => {
   const apiOrigin = process.env.NEXT_PUBLIC_CRUD_BACKEND_URL;
 
   if (!apiOrigin) {
@@ -21,12 +18,14 @@ export async function getCurrentUser(): Promise<CurrentUser | null> {
     .join("; ");
 
   try {
+    console.log("[auth] Getting current user from API");
     const response = await fetch(`${apiOrigin}/api/auth/me`, {
       headers: cookieHeader ? { cookie: cookieHeader } : undefined,
       cache: "no-store",
     });
 
     if (!response.ok) {
+      console.error("[auth] Failed to get current user from API");
       return null;
     }
 
@@ -34,9 +33,10 @@ export async function getCurrentUser(): Promise<CurrentUser | null> {
       user?: CurrentUser;
     };
 
+    console.log("[auth] Got current user from API");
     return payload.user ?? null;
   } catch (error) {
     console.error("[auth] Failed to retrieve current user", error);
     return null;
   }
-}
+});

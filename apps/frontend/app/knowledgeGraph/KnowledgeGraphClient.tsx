@@ -2,24 +2,19 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Select, { type MultiValue } from "react-select";
+import { getFullName } from "@/lib/profileUtils";
+import { useUser } from "@/providers/UserProvider";
 import RadarComparison from "@/components/chart/RadarComparison";
 import type { PublicProfile } from "@shared/profile";
-import type { CurrentUser } from "@/lib/types";
-import { getFullName } from "@/lib/profileUtils";
-import Select, { type MultiValue } from "react-select";
 
 type SelectOption = {
   value: string;
   label: string;
 };
 
-interface KnowledgeGraphClientProps {
-  currentUser: CurrentUser | null;
-}
-
-export default function KnowledgeGraphClient({
-  currentUser,
-}: KnowledgeGraphClientProps) {
+export default function KnowledgeGraphClient() {
+  const currentUser = useUser();
   const [data, setData] = useState<PublicProfile[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedPeople, setSelectedPeople] = useState<
