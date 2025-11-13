@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import RadarComparison from "@/components/chart/RadarComparison";
-import { mockPeopleData } from "@/components/data";
 import type { PublicProfile } from "@shared/profile";
 import type { CurrentUser } from "@/lib/types";
 import { getFullName } from "@/lib/profileUtils";
@@ -23,9 +22,59 @@ export default function KnowledgeGraphClient({
 }: KnowledgeGraphClientProps) {
   const [data, setData] = useState<PublicProfile[]>([]);
   const [loading, setLoading] = useState(false);
-  const [selectedPeople, setSelectedPeople] = useState<MultiValue<SelectOption>>([]);
+  const [selectedPeople, setSelectedPeople] = useState<
+    MultiValue<SelectOption>
+  >([]);
+  const [allProfiles, setAllProfiles] = useState<PublicProfile[]>([]);
+  const [profilesLoading, setProfilesLoading] = useState(true);
+  const [profilesError, setProfilesError] = useState<string | null>(null);
 
-  const allPeople = mockPeopleData.map((p) => ({
+  useEffect(() => {
+    const fetchAllProfiles = async () => {
+      const apiUrl = process.env.NEXT_PUBLIC_CRUD_BACKEND_URL;
+      if (!apiUrl) {
+        setProfilesError("API URL not configured");
+        setProfilesLoading(false);
+        return;
+      }
+
+      try {
+        setProfilesLoading(true);
+        setProfilesError(null);
+        const response = await fetch(`${apiUrl}/api/profiles/all`, {
+          credentials: "include",
+        });
+
+        if (!response.ok) {
+          if (response.status === 404) {
+            setProfilesError("No profiles found");
+          } else {
+            const errorData = await response.json().catch(() => ({}));
+            setProfilesError(
+              errorData.message ||
+                `Failed to load profiles (${response.status})`
+            );
+          }
+          setProfilesLoading(false);
+          return;
+        }
+
+        const result = (await response.json()) as { profiles: PublicProfile[] };
+        setAllProfiles(result.profiles);
+      } catch (err) {
+        console.error("[KnowledgeGraphClient] Error fetching profiles:", err);
+        setProfilesError(
+          err instanceof Error ? err.message : "Failed to load profiles"
+        );
+      } finally {
+        setProfilesLoading(false);
+      }
+    };
+
+    fetchAllProfiles();
+  }, []);
+
+  const allPeople = allProfiles.map((p) => ({
     value: p.id,
     label: getFullName(p),
   }));
@@ -34,18 +83,9 @@ export default function KnowledgeGraphClient({
     if (selectedPeople.length === 0) return;
     setLoading(true);
 
-    const mockFetch = new Promise<PublicProfile[]>((resolve) => {
-      setTimeout(() => {
-        const selectedIds = selectedPeople.map((option) => option.value);
-        const filtered = mockPeopleData.filter((p) =>
-          selectedIds.includes(p.id)
-        );
-        resolve(filtered);
-      }, 800);
-    });
-
-    const result = await mockFetch;
-    setData(result);
+    const selectedIds = selectedPeople.map((option) => option.value);
+    const filtered = allProfiles.filter((p) => selectedIds.includes(p.id));
+    setData(filtered);
     setLoading(false);
   };
 
@@ -53,16 +93,25 @@ export default function KnowledgeGraphClient({
     <div className="min-h-screen bg-[#f6f8fc] p-8">
       <h1 className="text-3xl font-bold mb-2 text-black">Knowledge Graph</h1>
       <p className="text-slate-600 mb-8">
-        Explore leaders through knowledge graph relationships and worldview analysis.
+        Explore leaders through knowledge graph relationships and worldview
+        analysis.
       </p>
-      <Select
-        isMulti
-        options={allPeople}
-        placeholder="Search and select leaders to compare..."
-        className="mb-4 text-black"
-        value={selectedPeople}
-        onChange={(selected) => setSelectedPeople((selected as MultiValue<SelectOption>) || [])}
-      />
+      {profilesLoading ? (
+        <div className="mb-4 text-slate-600">Loading profiles...</div>
+      ) : profilesError ? (
+        <div className="mb-4 text-red-600">Error: {profilesError}</div>
+      ) : (
+        <Select
+          isMulti
+          options={allPeople}
+          placeholder="Search and select leaders to compare..."
+          className="mb-4 text-black"
+          value={selectedPeople}
+          onChange={(selected) =>
+            setSelectedPeople((selected as MultiValue<SelectOption>) || [])
+          }
+        />
+      )}
       {!currentUser ? (
         <Link href="/login">
           <button className="flex items-center justify-center gap-2 text-black bg-white font-medium hover:bg-[#3c74f6] transition w-full px-4 py-2 border border-slate-200 rounded-md mb-3 focus:outline-none focus:ring-2 focus:ring-slate-300 hover:text-white">
@@ -78,20 +127,22 @@ export default function KnowledgeGraphClient({
           {loading
             ? "Loading..."
             : selectedPeople.length > 0
-            ? `Load Radar Chart (${selectedPeople.length} ${
-                selectedPeople.length === 1 ? "figure" : "figures"
-              })`
-            : "Load Radar Chart"}
+              ? `Load Radar Chart (${selectedPeople.length} ${
+                  selectedPeople.length === 1 ? "figure" : "figures"
+                })`
+              : "Load Radar Chart"}
         </button>
       )}
 
       {/* Chart Section */}
       {data.length > 0 && (
         <div className="mt-10">
-          <h2 className="text-lg font-semibold mb-1 text-black">Worldview Comparison</h2>
+          <h2 className="text-lg font-semibold mb-1 text-black">
+            Worldview Comparison
+          </h2>
           <p className="text-slate-600 mb-6">
-            The Knowledge Graph visualizes leaders&apos; worldviews across major global dimensions
-            like technology, markets, and governance.
+            The Knowledge Graph visualizes leaders&apos; worldviews across major
+            global dimensions like technology, markets, and governance.
           </p>
           <RadarComparison people={data} />
         </div>
@@ -99,4 +150,3 @@ export default function KnowledgeGraphClient({
     </div>
   );
 }
-
